@@ -1,3 +1,5 @@
 python server.py - startuje serwer
 
-npm run autobuild in the Svelte app folder to automatically build when you save a file
+npm i - install node modules
+
+npm run dev - start svelte

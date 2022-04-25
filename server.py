@@ -4,7 +4,6 @@ import json
 
 app = Flask(__name__)
 
-defaultData = [{"name": "Articles"}, {"name": "Menu1"}]
 
 # Path for our main Svelte page
 @app.route("/")
@@ -21,7 +20,9 @@ def home(path):
 
 @app.route("/rand", methods=["POST"])
 def hello():
+    f = open("./default.json")
 
+    defaultData = json.load(f)
     return json.dumps(defaultData);
 
 

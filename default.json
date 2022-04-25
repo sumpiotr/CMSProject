@@ -1,0 +1,13 @@
+[
+    { "name": "Menu1", "data": { "children": [] } },
+    {
+        "name": "Articles",
+        "data": {
+            "children": [
+                { "title": "Article 1", "text": "lorem ipsum suma ipsum lorem" },
+                { "title": "Article 2", "text": "lorem ipsum suma ipsum lorem" },
+                { "title": "Article 3", "text": "lorem ipsum suma ipsum lorem" }
+            ]
+        }
+    }
+]

@@ -3,9 +3,6 @@
     import { ComponentManager } from "./componentsManager.js";
 
     let data = [];
-
-    console.log("{{info}}");
-
     var newURL = window.location.pathname;
 
     fetch("./rand", {
@@ -18,13 +15,14 @@
         .then((d) => d.json())
         .then((d) => {
             data = d;
+            console.log(data);
         });
 </script>
 
 <Tailwindcss />
 <main>
     {#each data as element}
-        <svelte:component this={ComponentManager.getComponentByName(element.name)} />
+        <svelte:component this={ComponentManager.getComponentByName(element.name)} data={element.data} />
     {/each}
 </main>
 

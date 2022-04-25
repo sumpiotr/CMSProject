@@ -1,11 +1,15 @@
-from flask import Flask, send_from_directory
+from flask import Flask, request, send_from_directory
 import random
+import json
 
 app = Flask(__name__)
+
+defaultData = [{"name": "Articles"}, {"name": "Menu1"}]
 
 # Path for our main Svelte page
 @app.route("/")
 def base():
+    print()
     return send_from_directory('client/public', 'index.html')
 
 # Path for all the static files (compiled JS/CSS, etc.)
@@ -14,9 +18,11 @@ def home(path):
     return send_from_directory('client/public', path)
 
 
-@app.route("/rand")
+
+@app.route("/rand", methods=["POST"])
 def hello():
-    return str(random.randint(0, 100))
+
+    return json.dumps(defaultData);
 
 
 if __name__ == "__main__":

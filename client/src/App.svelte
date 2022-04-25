@@ -2,9 +2,23 @@
     import Tailwindcss from "./Tailwindcss.svelte";
     import { ComponentManager } from "./componentsManager.js";
 
-    let data = [{ name: "Articles" }, { name: "Menu1" }];
+    let data = [];
 
-    export let name;
+    console.log("{{info}}");
+
+    var newURL = window.location.pathname;
+
+    fetch("./rand", {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: {
+            "Content-Type": "application/json",
+        },
+    })
+        .then((d) => d.json())
+        .then((d) => {
+            data = d;
+        });
 </script>
 
 <Tailwindcss />

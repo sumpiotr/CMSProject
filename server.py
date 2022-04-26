@@ -6,15 +6,21 @@ app = Flask(__name__)
 
 
 # Path for our main Svelte page
+
 @app.route("/")
 def base():
     print()
     return send_from_directory('client/public', 'index.html')
 
+
+paths = ["global.css", "build/bundle.css", "build/bundle.js"]
 # Path for all the static files (compiled JS/CSS, etc.)
 @app.route("/<path:path>")
 def home(path):
-    return send_from_directory('client/public', path)
+    if path in paths:
+        return send_from_directory('client/public', path)
+    else:
+        return send_from_directory('client/public', "index.html")
 
 
 

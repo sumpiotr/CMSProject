@@ -7,9 +7,9 @@
     let data = { pages: [], menu: { name: "Menu1", data: { children: [] } } };
     var newURL = window.location.pathname;
 
-    fetch("./rand", {
+    fetch("./getPage", {
         method: "POST",
-        body: JSON.stringify(data),
+        body: JSON.stringify({ name: newURL }),
         headers: {
             "Content-Type": "application/json",
         },

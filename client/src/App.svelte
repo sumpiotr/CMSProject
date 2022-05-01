@@ -2,8 +2,9 @@
     import { Router, Route, Link } from "svelte-navigator";
     import Tailwindcss from "./Tailwindcss.svelte";
     import { ComponentManager } from "./componentsManager.js";
+    import Page from "./components/Pages/Page.svelte";
 
-    let data = { data: [], menu: { name: "Menu1", data: { children: [] } } };
+    let data = { pages: [], menu: { name: "Menu1", data: { children: [] } } };
     var newURL = window.location.pathname;
 
     fetch("./rand", {
@@ -22,11 +23,11 @@
 <Tailwindcss />
 <main>
     <Router>
-        <svelte:component this={ComponentManager.getComponentByName(data.menu.name)} data={data.menu.data} />
+        <svelte:component this={ComponentManager.getComponentByName(data.menuType)} data={data.pages} />
 
-        {#each data.menu.data.children as menuRoute}
-            <Route path={menuRoute.name}>
-                <svelte:component this={ComponentManager.getComponentByName(menuRoute.name)} {data} />
+        {#each data.pages as page}
+            <Route path={page.path}>
+                <Page pages={data.pages} path={page.path} />
             </Route>
         {/each}
     </Router>

@@ -3,6 +3,7 @@
     import Tailwindcss from "./Tailwindcss.svelte";
     import { ComponentManager } from "./componentsManager.js";
     import Page from "./components/Pages/Page.svelte";
+    import Footer from "./components/Footer.svelte";
 
     let data = { pages: [], menu: { name: "Menu1", data: { children: [] } } };
     var newURL = window.location.pathname;
@@ -21,7 +22,7 @@
 </script>
 
 <Tailwindcss />
-<main>
+<main class="flex flex-col min-h-screen justify-between">
     <Router>
         <svelte:component this={ComponentManager.getComponentByName(data.menuType)} data={data.pages} />
 
@@ -30,6 +31,8 @@
                 <Page pages={data.pages} path={page.path} />
             </Route>
         {/each}
+
+        <Footer />
     </Router>
 </main>
 

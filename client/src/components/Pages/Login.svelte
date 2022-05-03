@@ -19,6 +19,7 @@
         })
             .then((d) => d.json())
             .then((d) => {
+                console.log(d.password);
                 if (!d.flag) {
                     registerError = d.error;
                     canDisplayRegisterError = true;

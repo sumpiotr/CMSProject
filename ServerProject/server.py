@@ -2,19 +2,31 @@ from flask import Flask, request, send_from_directory
 import json
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
+from flask_login import UserMixin, login_user, LoginManager, login_required, logout_user, current_user
 
 app = Flask(__name__)
 
 # Add database
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///users.db"
 
+app.config["SECRET_KEY"] = "super secret and unique key"
 # initialize db
 db = SQLAlchemy(app)
+
+# login system
+
+login_manager = LoginManager()
+login_manager.init_app(app)
+
+
+@login_manager.user_loader
+def load_user(user_id):
+    return Users.query.get(int(user_id))
 
 
 # db models
 
-class Users(db.Model):
+class Users(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(50), nullable=False, unique=True)
     password_hash = db.Column(db.String(128))
@@ -72,7 +84,7 @@ def register():
         return json.dumps({"flag": False, "error": "username and password cannot be empty!"})
 
     user = Users.query.filter_by(username=data["username"]).first()
-    if user is not None:
+    if user:
         return json.dumps({"flag": False, "error": "username already taken"})
 
     user = Users(username=data["username"])
@@ -81,6 +93,19 @@ def register():
     db.session.commit()
 
     return json.dumps({"flag": True, "password": user.password_hash})
+
+
+@app.route("/login", methods=["POST"])
+def login():
+    data = request.json
+    if current_user.is_authenticated:
+        return json.dumps({"flag": False, "error": "You already are logged!"})
+    user = Users.query.filter_by(username=data["username"]).first()
+    if user:
+        if user.verify_password(data["password"]):
+            login_user(user)
+            return json.dumps({"flag": True})
+    return json.dumps({"flag": False, "error": "Wrong username or password!"})
 
 
 if __name__ == "__main__":

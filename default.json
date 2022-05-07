@@ -6,14 +6,41 @@
             "path": "",
             "data": [
                 {
+                    "id": 0,
+                    "name": "Slider",
+                    "data": {
+                        "text": "slider"
+                    }
+                },
+                {
+                    "id": 1,
                     "name": "Articles",
                     "data": {
                         "children": [
                             { "title": "Article 1", "text": "lorem ipsum suma ipsum lorem" },
                             { "title": "Article 2", "text": "lorem ipsum suma ipsum lorem" },
                             { "title": "Article 3", "text": "lorem ipsum suma ipsum lorem" }
-                        ]
+                        ],
+                        "color": "#000000",
+                        "background-color": "#ffffff"
                     }
+                },
+                {
+                    "id": 2,
+                    "name": "News",
+                    "data": {
+                        "text": "dziala"
+                    }
+                }
+            ]
+        },
+        {
+            "pageName": "Edit",
+            "path": "edit",
+            "data": [
+                {
+                    "name": "Edit",
+                    "data": {}
                 }
             ]
         },

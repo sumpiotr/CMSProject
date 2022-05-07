@@ -4,6 +4,7 @@
     import { ComponentManager } from "./componentsManager.js";
     import Page from "./components/Pages/Page.svelte";
     import Footer from "./components/Footer.svelte";
+    import { LIGHT_THEME } from "./themes";
 
     let data = { pages: [], menu: { name: "Menu1", data: { children: [] } } };
     var newURL = window.location.pathname;
@@ -15,24 +16,32 @@
             "Content-Type": "application/json",
         },
     })
-        .then((d) => d.json())
-        .then((d) => {
-            data = d;
-        });
+    .then((d) => d.json())
+    .then((d) => {
+        data = d;
+    });
+
+
 </script>
 
 <Tailwindcss />
-<main class="flex flex-col min-h-screen justify-between">
+<main class="flex flex-col min-h-screen justify-between" style={LIGHT_THEME}>
     <Router>
+
+        <!-- Menu -->
         <svelte:component this={ComponentManager.getComponentByName(data.menuType)} data={data.pages} />
 
+        <!-- Komponenty -->
         {#each data.pages as page}
             <Route path={page.path}>
-                <Page pages={data.pages} path={page.path} />
+                <Page pages={data.pages} path={page.path} fullData={data} />
             </Route>
         {/each}
 
+        <!-- Footer -->
         <Footer />
+
+
     </Router>
 </main>
 

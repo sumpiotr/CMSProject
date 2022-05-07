@@ -1,3 +1,4 @@
+import 'svelte-material-ui/bare.css';
 import App from './App.svelte';
 
 const app = new App({

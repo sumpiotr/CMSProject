@@ -4,7 +4,7 @@
     import { ComponentManager } from "./componentsManager.js";
     import Page from "./components/Pages/Page.svelte";
     import Footer from "./components/Footer.svelte";
-    import { LIGHT_THEME } from "./themes";
+    import { DARK_THEME, LIGHT_THEME } from "./themes";
 
     let data = { pages: [], menu: { name: "Menu1", data: { children: [] } } };
     var newURL = window.location.pathname;
@@ -51,6 +51,20 @@
         padding: 1em;
         max-width: 240px;
         margin: 0 auto;
+
+        display: flex;
+        flex-direction: column;
+
+        background-color: var(--background);
+
+        --mdc-theme-primary: var(--primary);
+        --mdc-theme-secondary: var(--secondary);
+        --mdc-theme-background: var(--background);
+        --mdc-theme-surface: var(--surface);
+        --mdc-theme-error: var(--error);
+        --mdc-theme-on-primary: var(--on-primary);
+        --mdc-theme-on-secondary: var(--on-secondary);
+        --mdc-theme-on-surface: var(--on-surface);
     }
 
     h1 {
@@ -65,4 +79,33 @@
             max-width: none;
         }
     }
+
+
+
+  :global(.mdc-text-field__icon),
+  :global(.mdc-deprecated-list-item),
+  :global(.mdc-floating-label) {
+    color: var(--outline) !important;
+  }
+
+  :global(.mdc-button),
+  :global(.mdc-data-table),
+  :global(.mdc-data-table__header-cell),
+  :global(.mdc-data-table__cell),
+  :global(.mdc-notched-outline__notch),
+  :global(.mdc-notched-outline__leading),
+  :global(.mdc-notched-outline__trailing) {
+    border-color: var(--outline) !important;
+  }
+
+  :global(.mdc-select__dropdown-icon) {
+    fill: var(--outline) !important;
+  }
+
+  :global(.mdc-data-table__cell),
+  :global(.mdc-data-table__header-cell),
+  :global(.mdc-text-field__input),
+  :global(.mdc-select__selected-text) {
+    color: var(--on-surface) !important;
+  }
 </style>

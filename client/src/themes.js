@@ -11,3 +11,17 @@ export const LIGHT_THEME = `
 --tertiary-container: #ffd7ee;
 --secondary: #5d5d72;
 --on-secondary: #ffffff;`
+
+export const DARK_THEME = `
+--background: black;
+--primary: #bec2ff;
+--outline: #918f99;
+--surface: #1b1b1f;
+--on-surface: #e4e1e6;
+--primary-container: #1a18e0;
+--on-primary: #0000ad;
+--error: #ffb4a9;
+--on-tertiary-container: #ffd7ee;
+--tertiary-container: #5f3c52;
+--secondary: #c5c4dd;
+--on-secondary: #2e2f42;`

@@ -3,11 +3,19 @@
     export let fullData;
 
     import EditElement from "./EditElement.svelte";
+
+    import Switch from "@smui/switch";
+
+    let isDarkMode = true;
 </script>
 
 
 <div class="edit">
     Edit
+    <br>
+    Dark Mode
+    <Switch bind:checked={isDarkMode} />
+
     
     {#each fullData.pages as page}
         {#if page.pageName == "Home"}

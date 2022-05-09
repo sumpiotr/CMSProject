@@ -1,17 +1,72 @@
 <script>
     export let data;
+
+    import Carousel from 'svelte-carousel'
+    import Color from './Color.svelte'
+
+    console.log(data);
+    
+    //document.getElementById("slider").style.color = data.color;
+    //document.getElementById("slider").style.backgroundColor = data.backgroundColor;
+
+    let colors = [
+        {"color": "#000000", "text": "czarny"},
+        {"color": "#000000", "text": "czarny"},
+        {"color": "#000000", "text": "czarny"},
+        {"color": "#FFFFFF", "text": "biały"},
+    ]
 </script>
 
 
-<div class="slider">
-    {data.text}
+
+<div style="--color: {data.color}; --backgroundColor: {data.backgroundColor}">
+    <div class="slider">
+        <p class="p">{data.text}</p>
+    </div>
 </div>
+
+<!-- <Carousel
+    autoplay
+    autoplayDuration={2000}
+>
+    {#each colors as { color, text} (color)}
+        <Color {color} {text} />
+    {/each}
+</Carousel> -->
+
+<!-- <script>
+    import { onMount } from 'svelte';
+
+    let Carousel;
+    onMount(async () => {
+        const module = await import('svelte-carousel');
+        Carousel = module.default;
+    });
+</script>
+
+<svelte:component this={Carousel}>
+    <div>1</div>
+    <div>2</div>
+    <div>3</div>
+</svelte:component> -->
+
+
 
 <style>
     .slider {
         height: 300px;
         width: auto;
-        background-color: green;
+        color: var(--color);
+        background-color: var(--backgroundColor);
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .p {
+        font-size: 24px;
+        font-weight: 500;
     }
 </style>
 
@@ -72,7 +127,7 @@
 
    
 </div>
-
+-->
 <!-- /Carousel -->
 
 <!-- <style>

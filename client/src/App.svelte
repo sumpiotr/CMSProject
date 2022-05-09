@@ -9,6 +9,7 @@
     let data = { pages: [], menu: { name: "Menu1", data: { children: [] } } };
     var newURL = window.location.pathname;
 
+
     fetch("./getPage", {
         method: "POST",
         body: JSON.stringify({ name: newURL }),
@@ -18,8 +19,10 @@
     })
     .then((d) => d.json())
     .then((d) => {
-        data = d;
+            data = d;
     });
+
+    $: console.log('App: ', data)
 
 
 </script>
@@ -29,12 +32,12 @@
     <Router>
 
         <!-- Menu -->
-        <svelte:component this={ComponentManager.getComponentByName(data.menuType)} data={data.pages} />
+        <svelte:component this={ComponentManager.getComponentByName(data.menuType)} bind:data={data.pages} />
 
         <!-- Komponenty -->
         {#each data.pages as page}
             <Route path={page.path}>
-                <Page pages={data.pages} path={page.path} fullData={data} />
+                <Page pages={data.pages} path={page.path} bind:fullData={data} />
             </Route>
         {/each}
 

@@ -9,27 +9,35 @@
                     "id": 0,
                     "name": "Slider",
                     "data": {
-                        "text": "slider"
+                        "images": 3,
+                        "duration": 10,
+                        "text": "Slider",
+                        "color": "#000000",
+                        "backgroundColor": "#f5f5f5"
                     }
                 },
                 {
                     "id": 1,
                     "name": "Articles",
                     "data": {
+                        "articles": 3,
                         "children": [
                             { "title": "Article 1", "text": "lorem ipsum suma ipsum lorem" },
                             { "title": "Article 2", "text": "lorem ipsum suma ipsum lorem" },
                             { "title": "Article 3", "text": "lorem ipsum suma ipsum lorem" }
                         ],
                         "color": "#000000",
-                        "background-color": "#ffffff"
+                        "backgroundColor": "#ffffff"
                     }
                 },
                 {
                     "id": 2,
                     "name": "News",
                     "data": {
-                        "text": "dziala"
+                        "title": "News",
+                        "text": "Lorem ipsum!!!",
+                        "color": "#000000",
+                        "backgroundColor": "#f5f5f5"
                     }
                 }
             ]

@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="23788a9b-3437-4e19-a2cf-071da8d29dc2" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/components/Pages/EditElement.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/components/Pages/EditElement.svelte" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

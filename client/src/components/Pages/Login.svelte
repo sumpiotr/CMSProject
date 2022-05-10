@@ -50,6 +50,7 @@
                     return;
                 }
                 loginErrorMessage = "";
+                window.location.replace("/");
             });
     }
 </script>

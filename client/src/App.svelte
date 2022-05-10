@@ -7,9 +7,8 @@
     import { DARK_THEME, LIGHT_THEME } from "./themes";
 
     let data = { pages: [], menu: { name: "Menu1", data: { children: [] } } };
+    let logged = false;
     var newURL = window.location.pathname;
-
-
     fetch("./getPage", {
         method: "POST",
         body: JSON.stringify({ name: newURL }),
@@ -17,34 +16,36 @@
             "Content-Type": "application/json",
         },
     })
-    .then((d) => d.json())
-    .then((d) => {
-            data = d;
-    });
+        .then((d) => d.json())
+        .then((d) => {
+            data = d.data;
+            logged = d.logged;
+        });
 
-    $: console.log('App: ', data)
+    function changeData(data) {}
 
-
+    $: {
+        console.log("App: ", data);
+    }
 </script>
 
 <Tailwindcss />
 <main class="flex flex-col min-h-screen justify-between" style={LIGHT_THEME}>
     <Router>
-
         <!-- Menu -->
-        <svelte:component this={ComponentManager.getComponentByName(data.menuType)} bind:data={data.pages} />
+        <svelte:component this={ComponentManager.getComponentByName(data.menuType)} bind:data={data.pages} {logged} />
 
         <!-- Komponenty -->
         {#each data.pages as page}
-            <Route path={page.path}>
-                <Page pages={data.pages} path={page.path} bind:fullData={data} />
-            </Route>
+            {#if (page.login == 1 && !logged) || (page.login == 2 && logged) || page.login == 0}
+                <Route path={page.path}>
+                    <Page pages={data.pages} path={page.path} bind:fullData={data} />
+                </Route>
+            {/if}
         {/each}
 
         <!-- Footer -->
         <Footer />
-
-
     </Router>
 </main>
 
@@ -83,32 +84,30 @@
         }
     }
 
+    :global(.mdc-text-field__icon),
+    :global(.mdc-deprecated-list-item),
+    :global(.mdc-floating-label) {
+        color: var(--outline) !important;
+    }
 
+    :global(.mdc-button),
+    :global(.mdc-data-table),
+    :global(.mdc-data-table__header-cell),
+    :global(.mdc-data-table__cell),
+    :global(.mdc-notched-outline__notch),
+    :global(.mdc-notched-outline__leading),
+    :global(.mdc-notched-outline__trailing) {
+        border-color: var(--outline) !important;
+    }
 
-  :global(.mdc-text-field__icon),
-  :global(.mdc-deprecated-list-item),
-  :global(.mdc-floating-label) {
-    color: var(--outline) !important;
-  }
+    :global(.mdc-select__dropdown-icon) {
+        fill: var(--outline) !important;
+    }
 
-  :global(.mdc-button),
-  :global(.mdc-data-table),
-  :global(.mdc-data-table__header-cell),
-  :global(.mdc-data-table__cell),
-  :global(.mdc-notched-outline__notch),
-  :global(.mdc-notched-outline__leading),
-  :global(.mdc-notched-outline__trailing) {
-    border-color: var(--outline) !important;
-  }
-
-  :global(.mdc-select__dropdown-icon) {
-    fill: var(--outline) !important;
-  }
-
-  :global(.mdc-data-table__cell),
-  :global(.mdc-data-table__header-cell),
-  :global(.mdc-text-field__input),
-  :global(.mdc-select__selected-text) {
-    color: var(--on-surface) !important;
-  }
+    :global(.mdc-data-table__cell),
+    :global(.mdc-data-table__header-cell),
+    :global(.mdc-text-field__input),
+    :global(.mdc-select__selected-text) {
+        color: var(--on-surface) !important;
+    }
 </style>

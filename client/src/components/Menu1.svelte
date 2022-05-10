@@ -1,5 +1,6 @@
 <script>
     export let data;
+    export let logged;
 </script>
 
 <header class="text-gray-600 body-font">
@@ -21,7 +22,9 @@
         </a>
         <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center">
             {#each data as child}
-                <a class="mr-5 hover:text-gray-900" href="/{child.path}">{child.pageName}</a>
+                {#if (child.login == 1 && !logged) || (child.login == 2 && logged) || child.login == 0}
+                    <a class="mr-5 hover:text-gray-900" href="/{child.path}">{child.pageName}</a>
+                {/if}
             {/each}
         </nav>
     </div>

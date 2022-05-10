@@ -68,10 +68,19 @@ def home(path):
 
 @app.route("/getPage", methods=["POST"])
 def get_page():
-    f = open("../default.json")
+    f = open("default.json")
     default_data = json.load(f)
-    return json.dumps(default_data)
+    return json.dumps({"data": default_data, "logged": current_user.is_authenticated})
 
+@app.route("/savePage", methods=["POST"])
+def save_page():
+
+    data = request.json["newData"]
+
+    with open('default.json', 'w', encoding='utf-8') as f:
+        json.dump(data, f, ensure_ascii=False, indent=4)
+
+    return json.dumps(data)
 
 @app.route("/register", methods=["POST"])
 def register():
@@ -107,6 +116,10 @@ def login():
             return json.dumps({"flag": True})
     return json.dumps({"flag": False, "error": "Wrong username or password!"})
 
+@app.route("/setImg", methods=["POST"])
+def set_img():
+    img = request.files["img"]
+    img.read()
 
 if __name__ == "__main__":
     app.run(debug=True)

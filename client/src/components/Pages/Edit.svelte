@@ -1,8 +1,10 @@
 <script>
     //export let data;
     export let fullData;
+
+    export let changeData;
     //let localData = Object.assign({}, fullData);
-    
+
     //deep cloning
     let localData = JSON.parse(JSON.stringify(fullData));
 
@@ -14,8 +16,8 @@
     let isDarkMode = true;
 
     $: {
-        console.log('Edit local: ', localData)
-        console.log('Edit full: ', fullData)
+        console.log("Edit local: ", localData);
+        console.log("Edit full: ", fullData);
     }
 
     function cancel() {
@@ -25,23 +27,31 @@
     function updatePage() {
         fullData = JSON.parse(JSON.stringify(localData));
 
+        fetch("./savePage", {
+            method: "POST",
+            body: JSON.stringify({ newData: fullData }),
+            headers: {
+                "Content-Type": "application/json",
+            },
+        })
+            .then((d) => d.json())
+            .then((d) => {
+                console.log("updated", d);
+            });
+
         //tutaj Piotrek
         //default.json = fullData
     }
-
 </script>
-
 
 <div class="edit">
     Dark Mode
     <Switch bind:checked={isDarkMode} />
 
-    
     {#each localData.pages as page}
         {#if page.pageName == "Home"}
-        
             {#each page.data as element}
-                <EditElement bind:element={element} />
+                <EditElement bind:element />
             {/each}
 
             <!-- {#each Array(page.data) as _, i}
@@ -50,24 +60,31 @@
         {/if}
     {/each}
     <div class="buttons">
-        <br>
+        <br />
         <Button on:click={() => {}}>
             <Label>Add New</Label>
         </Button>
-        <br><br><br>
-        <Button on:click={() => {cancel()}}>
+        <br /><br /><br />
+        <Button
+            on:click={() => {
+                cancel();
+            }}
+        >
             <Label>Cancel</Label>
         </Button>
-        <Button on:click={() => {updatePage()}}>
+        <Button
+            on:click={() => {
+                updatePage();
+            }}
+        >
             <Label>Save</Label>
         </Button>
-        <br>
+        <br />
     </div>
 
     <!-- {#each fullData.pages[0].data as _, j}
         <EditElement bind:element={fullData.pages[0].data[j]} />
     {/each} -->
-
 </div>
 
 <style>
@@ -79,5 +96,4 @@
     .buttons {
         margin-left: 35px;
     }
-    
 </style>

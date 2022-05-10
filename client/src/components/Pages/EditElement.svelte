@@ -3,14 +3,22 @@
     import Textfield from "@smui/textfield";
     import Button, { Label } from "@smui/button";
     import Paper from "@smui/paper";
-    import HelperText from '@smui/textfield/helper-text';
-    import CharacterCounter from '@smui/textfield/character-counter';
+    import HelperText from "@smui/textfield/helper-text";
+    import CharacterCounter from "@smui/textfield/character-counter";
     import DataTable, { Row, Cell } from "@smui/data-table";
     import { dataset_dev } from "svelte/internal";
 
     export let element;
-</script>
 
+    function setImg() {
+        let form = new FormData();
+        form.append("img", this.files[0]);
+        fetch("/setImg", {
+            method: "POST",
+            body: form,
+        });
+    }
+</script>
 
 <div class="element">
     {#if element.name == "Articles"}
@@ -20,83 +28,52 @@
                     <tr>
                         <td>
                             <div class="row">
-                                <Textfield
-                                    class="Textfield"
-                                    variant="filled"
-                                    type="number"
-                                    label="ID"
-                                    input$max="15"
-                                    input$min="0"
-                                    bind:value={element.id}
-                                />
+                                <Textfield class="Textfield" variant="filled" type="number" label="ID" input$max="15" input$min="0" bind:value={element.id} />
                             </div>
                         </td>
                         <td>
                             <div class="row">
                                 <label for="article_color">Color&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-                                <input type="color" id="article_color" name="article_color" bind:value={element.data.color}>
+                                <input type="color" id="article_color" name="article_color" bind:value={element.data.color} />
                             </div>
                         </td>
                     </tr>
                     <tr>
                         <td>
                             <div class="row">
-                                <Select
-                                    variant="filled"
-                                    bind:value={element.name}
-                                    key={(value) => value.toString()}
-                                    label="Name"
-                                >
-                                    
+                                <Select variant="filled" bind:value={element.name} key={(value) => value.toString()} label="Name">
                                     <Option value="Articles">Articles</Option>
                                     <Option value="Slider">Slider</Option>
                                     <Option value="News">News</Option>
-                                    
-                                </Select> 
+                                </Select>
                             </div>
                         </td>
                         <td>
                             <div class="row">
                                 <label for="article_backgroundColor">Background Color</label>
-                                <input type="color" id="article_backgroundColor" name="article_backgroundColor" bind:value={element.data.backgroundColor}>
+                                <input type="color" id="article_backgroundColor" name="article_backgroundColor" bind:value={element.data.backgroundColor} />
                             </div>
                         </td>
                     </tr>
                 </table>
 
-                
-                
-                <br><br>
+                <br /><br />
                 <div class="row">
-                    <Textfield
-                        class="Textfield"
-                        variant="filled"
-                        type="number"
-                        label="Articles"
-                        input$max="3"
-                        input$min="0"
-                        bind:value={element.data.articles}
-                    />
-                </div>       
-                <br>
-                <div class="doPapera">  
+                    <Textfield class="Textfield" variant="filled" type="number" label="Articles" input$max="3" input$min="0" bind:value={element.data.articles} />
+                </div>
+                <br />
+                <div class="doPapera">
                     {#each element.data.children as article, i}
                         <div class="paper">
                             <Paper elevation={6}>
-                                <div class="br"></div>
+                                <div class="br" />
                                 <!-- <p class="articleP">Article {i}:</p> -->
-                                <h4>Article {i+1}:</h4>
-                                <div class="br"></div>
+                                <h4>Article {i + 1}:</h4>
+                                <div class="br" />
                                 <div class="row">
-                                    <Textfield
-                                        class="Textfield"
-                                        variant="filled"
-                                        type="text"
-                                        label="Title"
-                                        bind:value={article.title}
-                                    />
+                                    <Textfield class="Textfield" variant="filled" type="text" label="Title" bind:value={article.title} />
                                 </div>
-                                <br>
+                                <br />
                                 <div>
                                     <!-- bez labela! -->
                                     <Textfield variant="outlined" textarea input$maxlength={100} bind:value={article.text}>
@@ -108,8 +85,8 @@
                         </div>
                     {/each}
                 </div>
-                
-                <br>
+
+                <br />
                 <div class="row">
                     <Button on:click={() => {}}>
                         <Label>SHOW</Label>
@@ -117,105 +94,72 @@
                 </div>
             </div>
         </Paper>
-        
+
         <!-- <p>{element.name}</p> -->
-        
+
         <!-- <select name="selectName" id="selectName">
             <option value="articles">Articles</option>
             <option value="slider">Slider</option>
             <option value="news">News</option>
         </select> -->
 
-
         <!-- <pre>data: {JSON.stringify(element.data, undefined, 4)}</pre>
 
         <p>SHOW</p> -->
-        <br>
+        <br />
     {:else if element.name == "Slider"}
         <Paper elevation={6}>
             <div class="options-selector">
-
                 <table>
                     <tr>
                         <td>
                             <div class="row">
-                                <Textfield
-                                    class="Textfield"
-                                    variant="filled"
-                                    type="number"
-                                    label="ID"
-                                    input$max="15"
-                                    input$min="0"
-                                    bind:value={element.id}
-                                />
+                                <Textfield class="Textfield" variant="filled" type="number" label="ID" input$max="15" input$min="0" bind:value={element.id} />
                             </div>
                         </td>
                         <td>
                             <div class="row">
                                 <label for="article_color">Color&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-                                <input type="color" id="article_color" name="article_color" bind:value={element.data.color}>
+                                <input type="color" id="article_color" name="article_color" bind:value={element.data.color} />
                             </div>
                         </td>
                     </tr>
                     <tr>
                         <td>
                             <div class="row">
-                                <Select
-                                    variant="filled"
-                                    bind:value={element.name}
-                                    key={(value) => value.toString()}
-                                    label="Name"
-                                >
-                                    
+                                <Select variant="filled" bind:value={element.name} key={(value) => value.toString()} label="Name">
                                     <Option value="Articles">Articles</Option>
                                     <Option value="Slider">Slider</Option>
                                     <Option value="News">News</Option>
-                                    
-                                </Select> 
+                                </Select>
                             </div>
                         </td>
                         <td>
                             <div class="row">
                                 <label for="article_backgroundColor">Background Color</label>
-                                <input type="color" id="article_backgroundColor" name="article_backgroundColor" bind:value={element.data.backgroundColor}>
+                                <input type="color" id="article_backgroundColor" name="article_backgroundColor" bind:value={element.data.backgroundColor} />
                             </div>
                         </td>
                     </tr>
                 </table>
-                <br>
+                <br />
                 <div class="row">
-                    <Textfield
-                        class="Textfield"
-                        variant="filled"
-                        type="number"
-                        label="Duration (s)"
-                        input$max="30"
-                        input$min="1"
-                        bind:value={element.data.duration}
-                    />
-                </div> 
-                <br>
+                    <Textfield class="Textfield" variant="filled" type="number" label="Duration (s)" input$max="30" input$min="1" bind:value={element.data.duration} />
+                </div>
+                <br />
                 <div class="row">
-                    <Textfield
-                        class="Textfield"
-                        variant="filled"
-                        type="number"
-                        label="Images"
-                        input$max="3"
-                        input$min="1"
-                        bind:value={element.data.images}
-                    />
-                </div>       
+                    <Textfield class="Textfield" variant="filled" type="number" label="Images" input$max="3" input$min="1" bind:value={element.data.images} />
+                </div>
 
-                <br>
+                <br />
 
                 <div>
                     {#each Array(element.data.images) as _, i}
-                        <input type="file" id="myfile" name="myfile"><br>
+                        <input type="file" id="myfile" name="myfile" on:change={setImg} /><br />
                     {/each}
                 </div>
-                
-                <br>
+
+                <br />
                 <div class="row">
                     <Button on:click={() => {}}>
                         <Label>SHOW</Label>
@@ -226,76 +170,51 @@
     {:else if element.name == "News"}
         <Paper elevation={6}>
             <div class="options-selector">
-
                 <table>
                     <tr>
                         <td>
                             <div class="row">
-                                <Textfield
-                                    class="Textfield"
-                                    variant="filled"
-                                    type="number"
-                                    label="ID"
-                                    input$max="15"
-                                    input$min="0"
-                                    bind:value={element.id}
-                                />
+                                <Textfield class="Textfield" variant="filled" type="number" label="ID" input$max="15" input$min="0" bind:value={element.id} />
                             </div>
                         </td>
                         <td>
                             <div class="row">
                                 <label for="article_color">Color&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-                                <input type="color" id="article_color" name="article_color" bind:value={element.data.color}>
+                                <input type="color" id="article_color" name="article_color" bind:value={element.data.color} />
                             </div>
                         </td>
                     </tr>
                     <tr>
                         <td>
                             <div class="row">
-                                <Select
-                                    variant="filled"
-                                    bind:value={element.name}
-                                    key={(value) => value.toString()}
-                                    label="Name"
-                                >
-                                    
+                                <Select variant="filled" bind:value={element.name} key={(value) => value.toString()} label="Name">
                                     <Option value="Articles">Articles</Option>
                                     <Option value="Slider">Slider</Option>
                                     <Option value="News">News</Option>
-                                    
-                                </Select> 
+                                </Select>
                             </div>
                         </td>
                         <td>
                             <div class="row">
                                 <label for="article_backgroundColor">Background Color</label>
-                                <input type="color" id="article_backgroundColor" name="article_backgroundColor" bind:value={element.data.backgroundColor}>
+                                <input type="color" id="article_backgroundColor" name="article_backgroundColor" bind:value={element.data.backgroundColor} />
                             </div>
                         </td>
                     </tr>
                 </table>
 
-                
-                
-     
-                <br>
+                <br />
                 <div class="doPapera">
                     <div class="paper">
                         <Paper elevation={6}>
-                            <div class="br"></div>
+                            <div class="br" />
                             <!-- <p class="articleP">Article {i}:</p> -->
                             <h4>News:</h4>
-                            <div class="br"></div>
+                            <div class="br" />
                             <div class="row">
-                                <Textfield
-                                    class="Textfield"
-                                    variant="filled"
-                                    type="text"
-                                    label="Title"
-                                    bind:value={element.data.title}
-                                />
+                                <Textfield class="Textfield" variant="filled" type="text" label="Title" bind:value={element.data.title} />
                             </div>
-                            <br>
+                            <br />
                             <div>
                                 <!-- bez labela! -->
                                 <Textfield variant="outlined" textarea input$maxlength={100} bind:value={element.data.text}>
@@ -306,13 +225,13 @@
                         </Paper>
                     </div>
                 </div>
-                <br>
+                <br />
                 <h4>News image:</h4>
                 <div>
-                    <input type="file" id="myfile" name="myfile"><br>
+                    <input type="file" id="myfile" name="myfile" /><br />
                 </div>
-                
-                <br><br><br>
+
+                <br /><br /><br />
                 <div class="row">
                     <Button on:click={() => {}}>
                         <Label>SHOW</Label>
@@ -325,9 +244,8 @@
         <p>{element.name}</p>
         <pre>data: {JSON.stringify(element.data, undefined, 4)}</pre>
         <p>SHOW</p>
-        <br>
+        <br />
     {/if}
-    
 </div>
 
 <style>
@@ -335,20 +253,20 @@
         /* Other styling... */
         text-align: right;
         clear: both;
-        float:left;
-        margin-right:15px;
+        float: left;
+        margin-right: 15px;
     }
 
     .element {
         /* border: 1px solid black; */
         padding-left: 5px;
     }
-    
+
     pre {
         margin-left: 50px;
         text-align: left;
     }
-    
+
     .options-selector {
         width: 100%;
         height: 100%;
@@ -362,7 +280,6 @@
         display: flex;
         flex-direction: row;
     }
-
 
     h4 {
         font-size: 21px;

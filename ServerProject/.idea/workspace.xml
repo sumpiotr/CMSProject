@@ -2,8 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="23788a9b-3437-4e19-a2cf-071da8d29dc2" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/ServerProject.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ServerProject.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server.py" beforeDir="false" afterPath="$PROJECT_DIR$/server.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/App.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/App.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/components/Menu1.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/components/Menu1.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/components/Pages/Edit.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/components/Pages/Edit.svelte" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../client/src/components/Pages/EditElement.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/components/Pages/EditElement.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/components/Pages/Login.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/components/Pages/Login.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../default.json" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -13,17 +21,20 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
   <component name="ProjectId" id="28qF7Jg8kErsWbb9QessIuWLV3l" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">
-    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
-  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;
+  }
+}</component>
   <component name="RunManager">
     <configuration name="server" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="ServerProject" />
@@ -37,6 +48,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/server.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
@@ -60,7 +72,16 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1651936039340</updated>
+      <workItem from="1652181181717" duration="3497000" />
+      <workItem from="1652185128648" duration="410000" />
+      <workItem from="1652196910559" duration="622000" />
     </task>
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/ServerProject$server.coverage" NAME="server Coverage Results" MODIFIED="1652196918018" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

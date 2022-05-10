@@ -14,3 +14,10 @@ python
 from server import db
 db.create_all()
 exit()
+
+
+login: 
+
+0 - brak wymagań
+1 - nie może być zalogowany
+2 - musi być zalogowany

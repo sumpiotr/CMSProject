@@ -116,6 +116,12 @@ def login():
             return json.dumps({"flag": True})
     return json.dumps({"flag": False, "error": "Wrong username or password!"})
 
+
+@app.route("/logOut", methods=["POST"])
+def log_out():
+    logout_user()
+    return json.dumps({})
+
 @app.route("/setImg", methods=["POST"])
 def set_img():
     img = request.files["img"]

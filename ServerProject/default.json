@@ -73,6 +73,17 @@
                     "data": {}
                 }
             ]
+        },
+        {
+            "pageName": "Logout",
+            "path": "logout",
+            "login": 2,
+            "data": [
+                {
+                    "name": "Logout",
+                    "data": {}
+                }
+            ]
         }
     ]
 }

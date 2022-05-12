@@ -30,6 +30,7 @@ class Users(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(50), nullable=False, unique=True)
     password_hash = db.Column(db.String(128))
+    admin = db.Column(db.Boolean, default=False)
 
     @property
     def password(self):
@@ -46,6 +47,12 @@ class Users(db.Model, UserMixin):
         return '<Username %r>' % self.username
 
 
+def other_admin_exist(user_id):
+    users = Users.query.all()
+    for user in users:
+        if user.admin and user.id != user_id:
+            return True
+    return False
 # Path for our main Svelte page
 
 @app.route("/")
@@ -70,17 +77,20 @@ def home(path):
 def get_page():
     f = open("default.json")
     default_data = json.load(f)
-    return json.dumps({"data": default_data, "logged": current_user.is_authenticated})
+    logged = current_user.is_authenticated
+    admin = current_user.admin if logged else False
+    return json.dumps({"data": default_data, "logged": logged, "admin": admin})
+
 
 @app.route("/savePage", methods=["POST"])
 def save_page():
-
     data = request.json["newData"]
 
     with open('default.json', 'w', encoding='utf-8') as f:
         json.dump(data, f, ensure_ascii=False, indent=4)
 
     return json.dumps(data)
+
 
 @app.route("/register", methods=["POST"])
 def register():
@@ -101,7 +111,7 @@ def register():
     db.session.add(user)
     db.session.commit()
 
-    return json.dumps({"flag": True, "password": user.password_hash})
+    return json.dumps({"flag": True, "error": "Registered! Now you can log in"})
 
 
 @app.route("/login", methods=["POST"])
@@ -122,10 +132,33 @@ def log_out():
     logout_user()
     return json.dumps({})
 
+@app.route("/getUsers", methods=["POST"])
+def get_users():
+    query = Users.query.all()
+    users = []
+
+    for user in query:
+        users.append({"username": user.username, "admin": user.admin, "id": user.id, "me": user.id == current_user.id})
+    return json.dumps({"users": users})
+
+@app.route("/changeAdmin", methods=["POST"])
+def change_admin():
+    data = request.json
+    user_id = data["userId"]
+    if other_admin_exist(user_id):
+        user = Users.query.filter_by(id=user_id).first()
+        user.admin = data["value"]
+        db.session.commit()
+        return json.dumps({"message": "Admin changed", "admin": data["value"]})
+    else:
+        return json.dumps({"message": "There must be minimum one admin!", "admin": True})
+
+
 @app.route("/setImg", methods=["POST"])
 def set_img():
     img = request.files["img"]
     img.read()
+
 
 if __name__ == "__main__":
     app.run(debug=True)

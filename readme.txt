@@ -21,3 +21,11 @@ login:
 0 - brak wymagań
 1 - nie może być zalogowany
 2 - musi być zalogowany
+
+Passwords:
+
+test ma admina
+
+test: test 
+
+każdy inny użytkownik: 123

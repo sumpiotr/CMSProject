@@ -8,6 +8,7 @@
 
     let data = { pages: [], menu: { name: "Menu1", data: { children: [] } } };
     let logged = false;
+    let admin = false;
     var newURL = window.location.pathname;
     fetch("./getPage", {
         method: "POST",
@@ -20,6 +21,8 @@
         .then((d) => {
             data = d.data;
             logged = d.logged;
+            admin = d.admin;
+            console.log(admin, logged);
         });
 
     function changeData(data) {}
@@ -33,14 +36,16 @@
 <main class="flex flex-col min-h-screen justify-between" style={LIGHT_THEME}>
     <Router>
         <!-- Menu -->
-        <svelte:component this={ComponentManager.getComponentByName(data.menuType)} bind:data={data.pages} {logged} />
+        <svelte:component this={ComponentManager.getComponentByName(data.menuType)} bind:data={data.pages} {logged} {admin} />
 
         <!-- Komponenty -->
         {#each data.pages as page}
             {#if (page.login == 1 && !logged) || (page.login == 2 && logged) || page.login == 0}
-                <Route path={page.path}>
-                    <Page pages={data.pages} path={page.path} bind:fullData={data} />
-                </Route>
+                {#if (page.admin == 1 && !admin) || (page.admin == 2 && admin) || page.admin == 0}
+                    <Route path={page.path}>
+                        <Page pages={data.pages} path={page.path} bind:fullData={data} />
+                    </Route>
+                {/if}
             {/if}
         {/each}
 

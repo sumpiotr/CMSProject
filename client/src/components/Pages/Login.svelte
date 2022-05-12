@@ -1,13 +1,8 @@
 <script>
     //register
-    let registerError = "username already taken";
-    let canDisplayRegisterError = "hidden";
+    let registerError = "";
     let registerUsername;
     let registerPassword;
-
-    function displayRegisterError(display) {
-        canDisplayRegisterError = display ? "" : "hidden";
-    }
 
     function register() {
         fetch("./register", {
@@ -19,13 +14,12 @@
         })
             .then((d) => d.json())
             .then((d) => {
-                console.log(d.password);
+                registerError = d.error;
                 if (!d.flag) {
-                    registerError = d.error;
-                    displayRegisterError(true);
                     return;
                 }
-                displayRegisterError(false);
+                registerUsername = "";
+                registerPassword = "";
             });
     }
 
@@ -106,7 +100,7 @@
             <input class="outline-none px-4 h-full py-2 text-lg" type="password" placeholder="password" bind:value={registerPassword} />
         </div>
 
-        <div class="show_info text-sm mb-4 w-max text-red-400 {canDisplayRegisterError}">{registerError}</div>
+        <div class="show_info text-sm mb-4 w-max text-red-400">{registerError}</div>
         <div class="submit border rounded mb-4 bg-blue-600 text-white cursor-pointer">
             <div class="wrapper flex w-max mx-auto">
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-5 my-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor"

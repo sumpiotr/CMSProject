@@ -3,6 +3,7 @@
     export let admin;
     export let id;
     export let changeAdmin;
+    export let removeUser;
     export let me;
 </script>
 
@@ -17,7 +18,16 @@
             }}
         />
     </div>
-    <div><button type="button">Remove</button></div>
+    <div>
+        <button
+            type="button"
+            on:click={() => {
+                if (confirm(me ? "Are you sure you want to remove your account?" : `Are you sure you want to remove ${username} account?`)) {
+                    removeUser(id, me);
+                }
+            }}>Remove</button
+        >
+    </div>
     <div>
         <button
             type="button"

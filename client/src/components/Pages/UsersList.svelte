@@ -37,12 +37,31 @@
             });
     }
 
+    function removeUser(userId, me) {
+        fetch("./removeUser", {
+            method: "POST",
+            body: JSON.stringify({ userId: userId, me: me }),
+            headers: {
+                "Content-Type": "application/json",
+            },
+        })
+            .then((d) => d.json())
+            .then((d) => {
+                if (me && d.deleted) {
+                    window.location.replace("/");
+                    return;
+                }
+                alert(d.message);
+                getUsers();
+            });
+    }
+
     getUsers();
 </script>
 
 <section class="users">
     {#each users as user}
-        <User username={user.username} admin={user.admin} id={user.id} {changeAdmin} me={user.me} />
+        <User username={user.username} admin={user.admin} id={user.id} {changeAdmin} {removeUser} me={user.me} />
     {/each}
 </section>
 

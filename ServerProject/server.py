@@ -141,6 +141,21 @@ def get_users():
         users.append({"username": user.username, "admin": user.admin, "id": user.id, "me": user.id == current_user.id})
     return json.dumps({"users": users})
 
+@app.route("/removeUser", methods=["POST"])
+def remove_user():
+    data = request.json
+    user_id = data["userId"]
+    user_to_remove = Users.query.filter_by(id=user_id).first()
+    if user_to_remove.admin:
+        if not other_admin_exist(user_id):
+            return json.dumps({"message": "There must be minimum one admin!", "deleted": False})
+
+    if current_user.id == user_id:
+        logout_user()
+    db.session.delete(user_to_remove)
+    db.session.commit()
+    return json.dumps({"message": "User deleted!", "deleted": True})
+
 @app.route("/changeAdmin", methods=["POST"])
 def change_admin():
     data = request.json

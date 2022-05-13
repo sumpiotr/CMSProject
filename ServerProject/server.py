@@ -53,6 +53,8 @@ def other_admin_exist(user_id):
         if user.admin and user.id != user_id:
             return True
     return False
+
+
 # Path for our main Svelte page
 
 @app.route("/")
@@ -132,6 +134,7 @@ def log_out():
     logout_user()
     return json.dumps({})
 
+
 @app.route("/getUsers", methods=["POST"])
 def get_users():
     query = Users.query.all()
@@ -141,20 +144,24 @@ def get_users():
         users.append({"username": user.username, "admin": user.admin, "id": user.id, "me": user.id == current_user.id})
     return json.dumps({"users": users})
 
+
 @app.route("/removeUser", methods=["POST"])
 def remove_user():
     data = request.json
-    user_id = data["userId"]
+    user_id = current_user.id if data["me"] else data["userId"]
     user_to_remove = Users.query.filter_by(id=user_id).first()
+
     if user_to_remove.admin:
-        if not other_admin_exist(user_id):
+        if not other_admin_exist(user_to_remove.id):
             return json.dumps({"message": "There must be minimum one admin!", "deleted": False})
 
-    if current_user.id == user_id:
+    if data["me"]:
         logout_user()
+
     db.session.delete(user_to_remove)
     db.session.commit()
     return json.dumps({"message": "User deleted!", "deleted": True})
+
 
 @app.route("/changeAdmin", methods=["POST"])
 def change_admin():
@@ -167,6 +174,20 @@ def change_admin():
         return json.dumps({"message": "Admin changed", "admin": data["value"]})
     else:
         return json.dumps({"message": "There must be minimum one admin!", "admin": True})
+
+
+@app.route("/changePassword", methods=["POST"])
+def change_password():
+    data = request.json
+    new_password = data["newPassword"].strip()
+
+    if len(new_password) == 0:
+        return json.dumps({"message": "Password can not be empty!"})
+
+    current_user.password = new_password
+    db.session.commit()
+
+    return json.dumps({"message": "Password changed!"})
 
 
 @app.route("/setImg", methods=["POST"])

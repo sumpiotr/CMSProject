@@ -6,6 +6,7 @@ import Login from "./components/Pages/Login.svelte";
 import Edit from "./components/Pages/Edit.svelte";
 import LogOut from "./components/Pages/LogOut.svelte";
 import UsersList from "./components/Pages/UsersList.svelte";
+import AccountSettings from "./components/Pages/AccountSettings.svelte";
 
 export class ComponentManager {
     static getComponentByName(name) {
@@ -24,6 +25,8 @@ export class ComponentManager {
                 return News;
             case "UsersList":
                 return UsersList;
+            case "AccountSettings":
+                return AccountSettings;
             case "Logout":
                 return LogOut;
             default:

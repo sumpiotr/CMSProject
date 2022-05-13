@@ -90,6 +90,18 @@
             ]
         },
         {
+            "pageName": "Account",
+            "path": "account",
+            "login": 2,
+            "admin": 0,
+            "data": [
+                {
+                    "name": "AccountSettings",
+                    "data": {}
+                }
+            ]
+        },
+        {
             "pageName": "Logout",
             "path": "logout",
             "login": 2,

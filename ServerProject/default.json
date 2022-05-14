@@ -11,7 +11,11 @@
                     "id": 0,
                     "name": "Slider",
                     "data": {
-                        "images": 3,
+                        "images": [
+                            "mapa2.jpg",
+                            "slider-img-2.jpg",
+                            "slider-img-3.jpg"
+                        ],
                         "duration": 10,
                         "text": "Slider",
                         "color": "#000000",
@@ -25,11 +29,11 @@
                         "articles": 3,
                         "children": [
                             {
-                                "title": "Czy działą?",
+                                "title": "Czy",
                                 "text": "lorem ipsum suma ipsum lorem"
                             },
                             {
-                                "title": "Pierogi z mięsem i serem (sam ser))",
+                                "title": "Pierogi z i serem (sam ser))",
                                 "text": "lorem ipsum suma ipsum lorem"
                             },
                             {

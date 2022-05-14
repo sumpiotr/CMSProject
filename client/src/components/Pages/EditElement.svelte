@@ -7,16 +7,23 @@
     import CharacterCounter from "@smui/textfield/character-counter";
     import DataTable, { Row, Cell } from "@smui/data-table";
     import { dataset_dev } from "svelte/internal";
+    import { Net } from "../../net.js";
 
     export let element;
+    export let addImg;
 
-    function setImg() {
+    function setImg(e, i) {
         let form = new FormData();
-        form.append("img", this.files[0]);
-        fetch("/setImg", {
-            method: "POST",
-            body: form,
-        });
+        form.append("img", e.target.files[0]);
+
+        //ustawić img na podgląd
+
+        addImg(form, element.data, i);
+
+        // fetch("/setImg", {
+        //     method: "POST",
+        //     body: form,
+        // });
     }
 </script>
 
@@ -148,14 +155,21 @@
                 </div>
                 <br />
                 <div class="row">
-                    <Textfield class="Textfield" variant="filled" type="number" label="Images" input$max="3" input$min="1" bind:value={element.data.images} />
+                    <Textfield class="Textfield" variant="filled" type="number" label="Images" input$max="3" input$min="1" bind:value={element.data.images.length} />
                 </div>
 
                 <br />
 
                 <div>
-                    {#each Array(element.data.images) as _, i}
-                        <input type="file" id="myfile" name="myfile" on:change={setImg} /><br />
+                    {#each element.data.images as _, i}
+                        <input
+                            type="file"
+                            id="myfile"
+                            name="myfile"
+                            on:change={(e) => {
+                                setImg(e, i);
+                            }}
+                        /><br />
                     {/each}
                 </div>
 

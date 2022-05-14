@@ -12,8 +12,34 @@
 
     import Switch from "@smui/switch";
     import Button, { Label } from "@smui/button";
+    import { Net } from "../../net.js";
 
     let isDarkMode = true;
+
+    let images = [];
+
+    function addImg(form, data, i) {
+        images.push((j) => {
+            form.append("oldImage", data.images[i]);
+            console.log(form);
+            fetch("./saveImg", {
+                method: "POST",
+                body: form,
+            })
+                .then((d) => d.json())
+                .then((d) => {
+                    data.images[i] = d.image;
+                    j++;
+                    if (j >= images.length - 1) {
+                        images = [];
+                        fullData = JSON.parse(JSON.stringify(localData));
+                        Net.updatePage(fullData);
+                        return;
+                    }
+                    images[j](j);
+                });
+        });
+    }
 
     $: {
         console.log("Edit local: ", localData);
@@ -25,20 +51,12 @@
     }
 
     function updatePage() {
+        if (images.length > 0) {
+            images[0](0);
+            return;
+        }
         fullData = JSON.parse(JSON.stringify(localData));
-
-        fetch("./savePage", {
-            method: "POST",
-            body: JSON.stringify({ newData: fullData }),
-            headers: {
-                "Content-Type": "application/json",
-            },
-        })
-            .then((d) => d.json())
-            .then((d) => {
-                console.log("updated", d);
-            });
-
+        Net.updatePage(fullData);
         //tutaj Piotrek
         //default.json = fullData
     }
@@ -51,7 +69,7 @@
     {#each localData.pages as page}
         {#if page.pageName == "Home"}
             {#each page.data as element}
-                <EditElement bind:element />
+                <EditElement bind:element {addImg} />
             {/each}
 
             <!-- {#each Array(page.data) as _, i}

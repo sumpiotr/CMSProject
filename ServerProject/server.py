@@ -3,6 +3,9 @@ import json
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin, login_user, LoginManager, login_required, logout_user, current_user
+from os.path import exists
+import os
+from flask import send_file
 
 app = Flask(__name__)
 
@@ -10,6 +13,7 @@ app = Flask(__name__)
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///users.db"
 
 app.config["SECRET_KEY"] = "super secret and unique key"
+
 # initialize db
 db = SQLAlchemy(app)
 
@@ -190,10 +194,35 @@ def change_password():
     return json.dumps({"message": "Password changed!"})
 
 
-@app.route("/setImg", methods=["POST"])
-def set_img():
+@app.route("/saveImg", methods=["POST"])
+def save_img():
     img = request.files["img"]
-    img.read()
+
+
+    new_filename = img.filename.split(".")[0]
+    extension = img.filename.split(".")[1]
+
+    while exists("img/" + new_filename + "." + extension):
+        new_filename += 1
+
+    old_img = request.form["oldImage"]
+
+    if exists("img/" + old_img):
+         os.remove("img/" + old_img)
+
+    img.save("img/" + new_filename + "." + extension)
+
+    return json.dumps({"image": new_filename + "." + extension})
+
+@app.route("/getImg", methods=["POST"])
+def get_img():
+    data = request.json
+    filename = data["filename"]
+
+    if exists("img/" +filename):
+        return send_file("img/" + filename, mimetype='image/gif')
+
+    return send_file("img/none.jpg", mimetype='image/gif')
 
 
 if __name__ == "__main__":

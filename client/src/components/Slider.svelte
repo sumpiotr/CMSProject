@@ -1,27 +1,44 @@
 <script>
     export let data;
 
-    import Carousel from 'svelte-carousel'
-    import Color from './Color.svelte'
+    import Carousel from "svelte-carousel";
+    import Color from "./Color.svelte";
+
+    let none = "";
 
     console.log(data);
-    
+
     //document.getElementById("slider").style.color = data.color;
     //document.getElementById("slider").style.backgroundColor = data.backgroundColor;
 
+    fetch("/getImg", {
+        method: "POST",
+        body: JSON.stringify({ filename: data.images[0] }),
+        headers: {
+            "Content-Type": "application/json",
+        },
+    })
+        .then((response) => response.blob())
+        .then((imageBlob) => {
+            // Then create a local URL for that image and print it
+            const imageObjectURL = URL.createObjectURL(imageBlob);
+            console.log(imageObjectURL);
+
+            none = imageObjectURL;
+        });
+
     let colors = [
-        {"color": "#000000", "text": "czarny"},
-        {"color": "#000000", "text": "czarny"},
-        {"color": "#000000", "text": "czarny"},
-        {"color": "#FFFFFF", "text": "biały"},
-    ]
+        { color: "#000000", text: "czarny" },
+        { color: "#000000", text: "czarny" },
+        { color: "#000000", text: "czarny" },
+        { color: "#FFFFFF", text: "biały" },
+    ];
 </script>
-
-
 
 <div style="--color: {data.color}; --backgroundColor: {data.backgroundColor}">
     <div class="slider">
         <p class="p">{data.text}</p>
+        <img src={none} />
     </div>
 </div>
 
@@ -34,43 +51,6 @@
     {/each}
 </Carousel> -->
 
-<!-- <script>
-    import { onMount } from 'svelte';
-
-    let Carousel;
-    onMount(async () => {
-        const module = await import('svelte-carousel');
-        Carousel = module.default;
-    });
-</script>
-
-<svelte:component this={Carousel}>
-    <div>1</div>
-    <div>2</div>
-    <div>3</div>
-</svelte:component> -->
-
-
-
-<style>
-    .slider {
-        height: 300px;
-        width: auto;
-        color: var(--color);
-        background-color: var(--backgroundColor);
-
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .p {
-        font-size: 24px;
-        font-weight: 500;
-    }
-</style>
-
-
 <!--
     <script>
     let src = "img/slider-img-1.jpg"
@@ -81,7 +61,6 @@
 <img src={src} alt="test">
 <img src="img/slider-img-1.jpg" alt="test">
 -->
-
 
 <!-- Carousel -->
 <!-- 
@@ -218,3 +197,41 @@
         }
     }
 </style> -->
+
+<!-- <script>
+    import { onMount } from 'svelte';
+
+    let Carousel;
+    onMount(async () => {
+        const module = await import('svelte-carousel');
+        Carousel = module.default;
+    });
+</script>
+
+<svelte:component this={Carousel}>
+    <div>1</div>
+    <div>2</div>
+    <div>3</div>
+</svelte:component> -->
+<style>
+    .slider {
+        height: 300px;
+        width: auto;
+        color: var(--color);
+        background-color: var(--backgroundColor);
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .p {
+        font-size: 24px;
+        font-weight: 500;
+    }
+
+    img {
+        width: 300px;
+        height: 100px;
+    }
+</style>

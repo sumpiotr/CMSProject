@@ -2,14 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="23788a9b-3437-4e19-a2cf-071da8d29dc2" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/default.json" beforeDir="false" afterPath="$PROJECT_DIR$/default.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server.py" beforeDir="false" afterPath="$PROJECT_DIR$/server.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/users.db" beforeDir="false" afterPath="$PROJECT_DIR$/users.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/components/Pages/Edit.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/components/Pages/Edit.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/App.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/App.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/components/Article.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/components/Article.svelte" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/components/Articles.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/components/Articles.svelte" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../client/src/components/Pages/EditElement.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/components/Pages/EditElement.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/components/Slider.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/components/Slider.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/net.js" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/net.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,6 +34,7 @@
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;
   }
 }</component>
@@ -79,13 +81,27 @@
       <workItem from="1652200733971" duration="473000" />
       <workItem from="1652453095559" duration="4741000" />
       <workItem from="1652548067226" duration="6463000" />
+      <workItem from="1652554764757" duration="90000" />
+      <workItem from="1652645208495" duration="5286000" />
+      <workItem from="1652651236410" duration="854000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/ServerProject$server.coverage" NAME="server Coverage Results" MODIFIED="1652553667165" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/ServerProject$server.coverage" NAME="server Coverage Results" MODIFIED="1652651366548" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

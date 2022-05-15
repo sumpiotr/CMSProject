@@ -5,6 +5,7 @@
     import Page from "./components/Pages/Page.svelte";
     import Footer from "./components/Footer.svelte";
     import { DARK_THEME, LIGHT_THEME } from "./themes";
+    import ArticlePage from "./components/Pages/ArticlePage.svelte";
 
     let data = { pages: [], menu: { name: "Menu1", data: { children: [] } } };
     let logged = false;
@@ -45,6 +46,17 @@
                     <Route path={page.path}>
                         <Page pages={data.pages} path={page.path} bind:fullData={data} />
                     </Route>
+                    {#if page.pageName == "Home"}
+                        {#each page.data as child}
+                            {#if child.name == "Articles"}
+                                {#each child.data.children as article, i}
+                                    <Route path={i + ""}>
+                                        <ArticlePage {logged} {article} index={i} />
+                                    </Route>
+                                {/each}
+                            {/if}
+                        {/each}
+                    {/if}
                 {/if}
             {/if}
         {/each}

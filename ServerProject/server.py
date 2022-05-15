@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from flask import Flask, request, send_from_directory
 import json
 from flask_sqlalchemy import SQLAlchemy
@@ -49,6 +51,14 @@ class Users(db.Model, UserMixin):
 
     def __repr__(self):
         return '<Username %r>' % self.username
+
+
+class Comment(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    article_id = db.Column(db.Integer)
+    add_date = db.Column(db.Date, default=datetime.now())
+    text = db.Column(db.String(100))
+    author = db.Column(db.String(50))
 
 
 def other_admin_exist(user_id):
@@ -223,6 +233,28 @@ def get_img():
         return send_file("img/" + filename, mimetype='image/gif')
 
     return send_file("img/none.jpg", mimetype='image/gif')
+
+
+@app.route("/addComment", methods=["POST"])
+def add_comment():
+    data = request.json
+    new_comment = Comment(article_id=data["articleIndex"], author=current_user.username, text=data["text"])
+    db.session.add(new_comment)
+    db.session.commit()
+    return json.dumps({})
+
+
+@app.route("/getComments", methods=["POST"])
+def get_comments():
+    data = request.json
+    comments_query = Comment.query.filter_by(article_id=data["index"]).order_by(Comment.add_date.desc())
+    comments = []
+
+    for comment in comments_query:
+        comments.append({"username": comment.author, "text": comment.text})
+
+    return json.dumps({"comments": comments})
+
 
 
 if __name__ == "__main__":

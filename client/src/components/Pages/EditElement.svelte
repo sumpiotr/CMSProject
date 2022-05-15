@@ -83,8 +83,8 @@
                                 <br />
                                 <div>
                                     <!-- bez labela! -->
-                                    <Textfield variant="outlined" textarea input$maxlength={100} bind:value={article.text}>
-                                        <CharacterCounter slot="internalCounter">0 / 100</CharacterCounter>
+                                    <Textfield variant="outlined" textarea input$maxlength={1000} bind:value={article.text}>
+                                        <CharacterCounter slot="internalCounter">0 / 1000</CharacterCounter>
                                         <HelperText slot="helper">Text</HelperText>
                                     </Textfield>
                                 </div>

@@ -12,14 +12,28 @@
                     "name": "Slider",
                     "data": {
                         "images": [
-                            "catfish.png",
                             "slider-img-2.jpg",
-                            "slider-img-3.jpg"
+                            "slider-img-3.jpg",
+                            "lornetka.jpg",
+                            "droga.jpg"
                         ],
-                        "duration": 10,
+                        "descriptions": [
+                            "slider1",
+                            "slider2",
+                            "lornetka",
+                            "droga",
+                            "gory",
+                            null,
+                            null,
+                            null,
+                            null,
+                            null
+                        ],
+                        "duration": 30,
+                        "autoplay": true,
                         "text": "Slider",
-                        "color": "#000000",
-                        "backgroundColor": "#ff00ff"
+                        "color": "#ffffff",
+                        "backgroundColor": "#d7a3d7"
                     }
                 },
                 {
@@ -29,11 +43,11 @@
                         "articles": 3,
                         "children": [
                             {
-                                "title": "Czy",
+                                "title": "Lorem ipsum",
                                 "text": "\nLorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget nulla in sem tempor suscipit. In hac habitasse platea dictumst. Nulla placerat, sapien ac interdum pulvinar, diam risus vehicula diam, a luctus mi urna at nisl. Aliquam non luctus augue. Phasellus tempus dolor nec vehicula viverra. Quisque non laoreet enim, vel feugiat nulla. Vestibulum vulputate felis sit amet massa ultricies fringilla. Aliquam suscipit consequat lorem, id varius massa fringilla sit amet. Donec tincidunt nulla vel justo vehicula maximus. Duis in elementum ante, et condimentum lectus. Quisque ac blandit ligula.\n\nAliquam erat volutpat. Nunc placerat lorem in vestibulum lobortis. Nunc semper sit amet massa vel vestibulum. Phasellus eu augue nisl. Vivamus ultricies luctus tristique. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Ut aliquet vulputate neque, at fringilla leo ullamcorper ac.\n\nPraesent accumsan cursus libero vitae tristique. Mauris mollis risus a efficitur mollis. Aenean at euismod ex. Curabitur pulvinar congue sem nec placerat. Curabitur ultricies, lorem sed egestas dictum, ante augue placerat orci, sit amet egestas arcu nibh eget est. Proin dignissim diam elit, non aliquam ante scelerisque non. Proin a dapibus diam.\n\nDonec vitae condimentum turpis. Donec sodales, nisi eu bibendum condimentum, massa sem pulvinar risus, eget placerat elit risus sit amet est. Integer consectetur placerat metus, at scelerisque augue vestibulum vel. Aliquam non convallis leo, in tempus mi. Fusce sem urna, venenatis non condimentum id, mollis a sapien. Curabitur viverra sed elit non eleifend. Praesent congue non arcu at egestas. Proin lobortis velit eu gravida maximus. Curabitur vel commodo tortor, eget iaculis dolor.\n\nNam dignissim, leo eget ornare bibendum, elit risus finibus metus, vel aliquet odio diam ac nisl. Pellentesque et lectus a nisl tempus semper in nec ligula. Duis suscipit eleifend nulla eget tempus. Fusce in euismod nunc. Pellentesque quis justo lobortis, molestie lorem in, posuere felis. Phasellus augue urna, mattis in luctus et, suscipit id augue. Vestibulum ut enim sed orci fringilla bibendum. Aenean eget eros felis. Etiam eget maximus magna. Curabitur eget neque nunc. Quisque at iaculis massa, at pharetra nibh."
                             },
                             {
-                                "title": "Pierogi z i serem (sam ser))",
+                                "title": "Article 2",
                                 "text": "lorem ipsum suma ipsum lorem"
                             },
                             {
@@ -49,6 +63,7 @@
                     "id": 2,
                     "name": "News",
                     "data": {
+                        "image": "catfish.png",
                         "title": "News",
                         "text": "Lorem ipsum!!!",
                         "color": "#000000",

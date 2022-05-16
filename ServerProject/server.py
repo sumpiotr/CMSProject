@@ -95,7 +95,7 @@ def get_page():
     default_data = json.load(f)
     logged = current_user.is_authenticated
     admin = current_user.admin if logged else False
-    return json.dumps({"data": default_data, "logged": logged, "admin": admin})
+    return json.dumps({"data": default_data, "logged": logged, "admin": admin}, ensure_ascii=False)
 
 
 @app.route("/savePage", methods=["POST"])
@@ -206,21 +206,30 @@ def change_password():
 
 @app.route("/saveImg", methods=["POST"])
 def save_img():
-    img = request.files["img"]
+    # old_img = request.form["oldImage"]
+    #
+    # if exists("img/" + old_img):
+    #     os.remove("img/" + old_img)
 
+
+    img = request.files["img"]
 
     new_filename = img.filename.split(".")[0]
     extension = img.filename.split(".")[1]
 
-    while exists("img/" + new_filename + "." + extension):
-        new_filename += 1
+    '''
+    new_full_filename = new_filename
+    new_filename_number = 0
+    while exists("img/" + new_full_filename + "." + extension):
+        new_full_filename = new_filename + str(new_filename_number)
+        new_filename_number += 1
 
-    old_img = request.form["oldImage"]
 
-    if exists("img/" + old_img):
-         os.remove("img/" + old_img)
-
+    img.save("img/" + new_full_filename + "." + extension)
+    '''
+    
     img.save("img/" + new_filename + "." + extension)
+
 
     return json.dumps({"image": new_filename + "." + extension})
 

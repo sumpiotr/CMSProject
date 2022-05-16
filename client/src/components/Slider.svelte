@@ -2,236 +2,47 @@
     export let data;
 
     import Carousel from "svelte-carousel";
-    import Color from "./Color.svelte";
+    import { _getCurrentPageIndexByCurrentParticleIndexInfinite } from "svelte-carousel/src/utils/page";
+    import SliderItem from "./SliderItem.svelte";
 
-    let none = "";
+    let images = new Array(data.images.length);
 
     console.log(data);
 
-    //document.getElementById("slider").style.color = data.color;
-    //document.getElementById("slider").style.backgroundColor = data.backgroundColor;
+    for(let i = 0; i < data.images.length; i++) {
 
-    fetch("/getImg", {
-        method: "POST",
-        body: JSON.stringify({ filename: data.images[0] }),
-        headers: {
-            "Content-Type": "application/json",
-        },
-    })
-        .then((response) => response.blob())
-        .then((imageBlob) => {
-            // Then create a local URL for that image and print it
-            const imageObjectURL = URL.createObjectURL(imageBlob);
-            console.log(imageObjectURL);
+        fetch("/getImg", {
+            method: "POST",
+            body: JSON.stringify({ filename: data.images[i] }),
+            headers: {
+                "Content-Type": "application/json",
+            },
+        })
+            .then((response) => response.blob())
+            .then((imageBlob) => {
+                // Then create a local URL for that image and print it
+                const imageObjectURL = URL.createObjectURL(imageBlob);
+                console.log(imageObjectURL);
 
-            none = imageObjectURL;
-        });
-
-    let colors = [
-        { color: "#000000", text: "czarny" },
-        { color: "#000000", text: "czarny" },
-        { color: "#000000", text: "czarny" },
-        { color: "#FFFFFF", text: "biały" },
-    ];
+                images[i] = imageObjectURL;
+            });
+    }
 </script>
 
-<div style="--color: {data.color}; --backgroundColor: {data.backgroundColor}">
-    <div class="slider">
-        <p class="p">{data.text}</p>
-        <img src={none} />
-    </div>
-</div>
-
-<!-- <Carousel
-    autoplay
-    autoplayDuration={2000}
->
-    {#each colors as { color, text} (color)}
-        <Color {color} {text} />
-    {/each}
-</Carousel> -->
-
-<!--
-    <script>
-    let src = "img/slider-img-1.jpg"
-</script>
-
-<img src="./img/slider-img-1.jpg" alt="jpg1" class="d-block w-100">
-
-<img src={src} alt="test">
-<img src="img/slider-img-1.jpg" alt="test">
--->
-
-<!-- Carousel -->
-<!-- 
-<div class="container-fluid px-0">
-    <div class="carousel slide" id="slider" data-ride="carousel" data-interval="20000" data-pause="hover">
-
-        <ol class="carousel-indicators d-none d-md-inline-flex">
-            <li data-target="#slider" data-slide-to="0" class="active"></li>
-            <li data-target="#slider" data-slide-to="1"></li>
-            <li data-target="#slider" data-slide-to="2"></li>
-        </ol>
-
-        <div class="carousel-inner "> 
-            <div class="carousel-item active">
-                <img src="./img/slider-img-1.jpg" alt="jpg1" class="d-block w-100">
-
-                <div class="carousel-caption">
-                    <h2 class="display-4">Slide1</h2>
-                    <p class="h4">Slide1 Slide1 Slide1</p>
-                    <div class="d-none d-md-block">
-                        <button type="button" class="btn btn-lg btn-outline-light mr-2 mt-3">Button1</button>
-                        <button type="button" class="btn btn-lg btn-primary ml-2 mt-3">Button2</button>
-                    </div>
-
-                </div>
-            </div>
-            <div class="carousel-item">
-                <img src="./img/slider-img-2.jpg" alt="jpg2" class="d-block w-100">
-            </div>
-            <div class="carousel-item">
-                <img src="./img/slider-img-3.jpg" alt="jpg3" class="d-block w-100">
-            </div>
-        </div>
-
-        <a href="#slider" class="carousel-control-prev d-none d-md-flex" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon"></span>
-        </a>
-
-        <a href="#slider" class="carousel-control-next d-none d-md-flex" role="button" data-slide="next">
-            <span class="carousel-control-next-icon"></span>
-        </a>
-    </div>
-
-   
-</div>
--->
-<!-- /Carousel -->
-
-<!-- <style>
-    /* Carousel */
-
-    * {
-    scroll-behavior: smooth;
-    }
-
-    .carousel-indicators li {
-        color: azure;
-    }
-
-    .carousel-caption {
-        position: absolute;
-        top: 30%;
-        transform: translateY(-50%);
-    }
-
-    .carousel-caption h2, .carousel-caption h2 {
-        text-shadow: 3px 2px 4px black;
-    }
-
-    .carousel-caption h2.display-4 {
-        font-size: 150%;
-        font-weight: 500;
-    }
-
-    .btn-primary {
-        background-color: #0c86cc;
-        border-color: #0e78be;
-    }
-
-    .btn-primary:hover {
-        background-color: #0f6197;
-        border-color: #09598f;
-    }
-
-    .carousel-caption button {
-        box-shadow: 3px 2px 4px rgba(0, 0, 0, 0.4);
-    }
-
-    .carousel-caption .btn-outline-light {
-        box-shadow: 3px 2px 4px rgba(0, 0, 0, 0.4);
-    }
-
-    .carousel-caption .btn-outline-light:hover {
-        box-shadow: none;
-    }
-
-    @media (min-width: 576px) {
-        .carousel-caption {
-            top: 40%;
-        }
-
-        .carousel-caption h2.display-4 {
-            font-size: 350%;
-        }
-    }
-
-    @media (min-width: 768px) {
-        .carousel-caption {
-            top: 45%;
-        }
-
-        .carousel-caption h2.display-4 {
-            font-size: 400%;
-        }
-    }
-
-    @media (min-width: 992px) {
-        .carousel-caption {
-            top: 45%;
-        }
-
-        .carousel-caption h2.display-4 {
-            font-size: 500%;
-        }
-    }
-
-    @media (min-width: 1200px) {
-        .carousel-caption {
-            top: 50%;
-        }
-
-        .carousel-caption h2.display-4 {
-            font-size: 600%;
-        }
-    }
-</style> -->
-
-<!-- <script>
-    import { onMount } from 'svelte';
-
-    let Carousel;
-    onMount(async () => {
-        const module = await import('svelte-carousel');
-        Carousel = module.default;
-    });
-</script>
-
-<svelte:component this={Carousel}>
-    <div>1</div>
-    <div>2</div>
-    <div>3</div>
-</svelte:component> -->
-<style>
-    .slider {
-        height: 300px;
-        width: auto;
-        color: var(--color);
-        background-color: var(--backgroundColor);
-
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .p {
-        font-size: 24px;
-        font-weight: 500;
-    }
-
-    img {
-        width: 300px;
-        height: 100px;
-    }
-</style>
+{#if data.autoplay == true}
+    <Carousel
+        autoplay
+        autoplayDuration={data.duration * 1000}
+        pauseOnFocus
+    >
+        {#each data.images as _, i}
+            <SliderItem image={images[i]} text={data.descriptions[i]} color={data.color} backgroundColor={data.backgroundColor} />
+        {/each}
+    </Carousel>
+{:else}
+    <Carousel>
+        {#each data.images as _, i}
+            <SliderItem image={none[i]} text={data.descriptions[i]} color={data.color} backgroundColor={data.backgroundColor} />
+        {/each}
+    </Carousel>
+{/if}

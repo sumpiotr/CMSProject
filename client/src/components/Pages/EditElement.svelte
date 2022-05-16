@@ -8,6 +8,7 @@
     import DataTable, { Row, Cell } from "@smui/data-table";
     import { dataset_dev } from "svelte/internal";
     import { Net } from "../../net.js";
+    import Switch from "@smui/switch";
 
     export let element;
     export let addImg;
@@ -25,6 +26,15 @@
         //     body: form,
         // });
     }
+
+    function handle(name, min, max) {    
+        if(name % 1. != 0) name = Math.floor(name);
+        if(name > max) name = max;
+        if(name < min) name = min;
+        return name;
+    }
+
+
 </script>
 
 <div class="element">
@@ -35,7 +45,7 @@
                     <tr>
                         <td>
                             <div class="row">
-                                <Textfield class="Textfield" variant="filled" type="number" label="ID" input$max="15" input$min="0" bind:value={element.id} />
+                                <Textfield disabled class="Textfield" variant="filled" type="number" label="ID" input$min="0" input$max="10" on:change={() => {element.id = handle(element.id, 0, 10)}} bind:value={element.id} />
                             </div>
                         </td>
                         <td>
@@ -48,7 +58,7 @@
                     <tr>
                         <td>
                             <div class="row">
-                                <Select variant="filled" bind:value={element.name} key={(value) => value.toString()} label="Name">
+                                <Select disabled variant="filled" bind:value={element.name} key={(value) => value.toString()} label="Name">
                                     <Option value="Articles">Articles</Option>
                                     <Option value="Slider">Slider</Option>
                                     <Option value="News">News</Option>
@@ -66,7 +76,7 @@
 
                 <br /><br />
                 <div class="row">
-                    <Textfield class="Textfield" variant="filled" type="number" label="Articles" input$max="3" input$min="0" bind:value={element.data.articles} />
+                    <Textfield class="Textfield" variant="filled" type="number" label="Articles" input$min="0" input$max="3" on:change={() => {element.data.articles = handle(element.data.articles, 0, 3)}} bind:value={element.data.articles} />
                 </div>
                 <br />
                 <div class="doPapera">
@@ -93,27 +103,14 @@
                     {/each}
                 </div>
 
-                <br />
+                <!-- <br />
                 <div class="row">
                     <Button on:click={() => {}}>
                         <Label>SHOW</Label>
                     </Button>
-                </div>
+                </div> -->
             </div>
         </Paper>
-
-        <!-- <p>{element.name}</p> -->
-
-        <!-- <select name="selectName" id="selectName">
-            <option value="articles">Articles</option>
-            <option value="slider">Slider</option>
-            <option value="news">News</option>
-        </select> -->
-
-        <!-- <pre>data: {JSON.stringify(element.data, undefined, 4)}</pre>
-
-        <p>SHOW</p> -->
-        <br />
     {:else if element.name == "Slider"}
         <Paper elevation={6}>
             <div class="options-selector">
@@ -121,7 +118,7 @@
                     <tr>
                         <td>
                             <div class="row">
-                                <Textfield class="Textfield" variant="filled" type="number" label="ID" input$max="15" input$min="0" bind:value={element.id} />
+                                <Textfield disabled  class="Textfield" variant="filled" type="number" label="ID" input$min="0" input$max="10" on:change={() => {element.id = handle(element.id, 0, 10)}} bind:value={element.id} />
                             </div>
                         </td>
                         <td>
@@ -134,7 +131,7 @@
                     <tr>
                         <td>
                             <div class="row">
-                                <Select variant="filled" bind:value={element.name} key={(value) => value.toString()} label="Name">
+                                <Select disabled variant="filled" bind:value={element.name} key={(value) => value.toString()} label="Name">
                                     <Option value="Articles">Articles</Option>
                                     <Option value="Slider">Slider</Option>
                                     <Option value="News">News</Option>
@@ -150,35 +147,55 @@
                     </tr>
                 </table>
                 <br />
+                <div style="position: inline;">
+                    Autoplay:
+                    <Switch bind:checked={element.data.autoplay} />
+                </div>
+                <br />
+                {#if element.data.autoplay == true}
+                    <div class="row">
+                        <Textfield class="Textfield" variant="filled" type="number" label="Duration (s)" input$min="1" input$max="30" input$step="1" on:change={() => {element.data.duration = handle(element.data.duration, 1, 30)}} bind:value={element.data.duration} />
+                    </div>
+                    <br />
+                {/if}
                 <div class="row">
-                    <Textfield class="Textfield" variant="filled" type="number" label="Duration (s)" input$max="30" input$min="1" bind:value={element.data.duration} />
+                    <Textfield class="Textfield" variant="filled" type="number" label="Images" input$min="1" input$max="10" on:change={() => {element.data.images.length = handle(element.data.images.length, 1, 10)}} bind:value={element.data.images.length} />
                 </div>
                 <br />
-                <div class="row">
-                    <Textfield class="Textfield" variant="filled" type="number" label="Images" input$max="3" input$min="1" bind:value={element.data.images.length} />
-                </div>
+                {#if element.data.images.length <= 10 && element.data.images.length >= 1 && element.data.images.length % 1. == 0}
+                    <div>
+                        <table>
+                            {#each element.data.images as _, i}
+                                <tr>
+                                    <td>
+                                        <div class="row">
+                                            <input
+                                                type="file"
+                                                id="myfile"
+                                                name="myfile"
+                                                on:change={(e) => {
+                                                    setImg(e, i);
+                                                }}
+                                            />
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="row">
+                                            <Textfield class="Textfield" variant="filled" type="text" label="description" bind:value={element.data.descriptions[i]} />
+                                        </div>
+                                    </td>
+                                </tr>
+                            {/each}
+                        </table>
+                    </div>
+                {/if}
 
-                <br />
-
-                <div>
-                    {#each element.data.images as _, i}
-                        <input
-                            type="file"
-                            id="myfile"
-                            name="myfile"
-                            on:change={(e) => {
-                                setImg(e, i);
-                            }}
-                        /><br />
-                    {/each}
-                </div>
-
-                <br />
+                <!-- <br />
                 <div class="row">
                     <Button on:click={() => {}}>
                         <Label>SHOW</Label>
                     </Button>
-                </div>
+                </div> -->
             </div>
         </Paper>
     {:else if element.name == "News"}
@@ -188,7 +205,7 @@
                     <tr>
                         <td>
                             <div class="row">
-                                <Textfield class="Textfield" variant="filled" type="number" label="ID" input$max="15" input$min="0" bind:value={element.id} />
+                                <Textfield disabled  class="Textfield" variant="filled" type="number" label="ID" input$min="0" input$max="10" on:change={() => {element.id = handle(element.id, 0, 10)}} bind:value={element.id} />
                             </div>
                         </td>
                         <td>
@@ -201,7 +218,7 @@
                     <tr>
                         <td>
                             <div class="row">
-                                <Select variant="filled" bind:value={element.name} key={(value) => value.toString()} label="Name">
+                                <Select disabled variant="filled" bind:value={element.name} key={(value) => value.toString()} label="Name">
                                     <Option value="Articles">Articles</Option>
                                     <Option value="Slider">Slider</Option>
                                     <Option value="News">News</Option>
@@ -243,22 +260,33 @@
                 <h4>News image:</h4>
                 <div>
                     <input type="file" id="myfile" name="myfile" /><br />
+                    <!-- <div class="row">
+                        <input
+                            type="file"
+                            id="newsfile"
+                            name="newsfile"
+                            on:change={(e) => {
+                                setImg(e, 0);
+                            }}
+                        />
+                    </div>
+                    <br /> -->
                 </div>
 
-                <br /><br /><br />
+                <!-- <br /><br /><br />
                 <div class="row">
                     <Button on:click={() => {}}>
                         <Label>SHOW</Label>
                     </Button>
-                </div>
+                </div> -->
             </div>
         </Paper>
-    {:else}
+    <!-- {:else}
         <p>{element.id}</p>
         <p>{element.name}</p>
         <pre>data: {JSON.stringify(element.data, undefined, 4)}</pre>
         <p>SHOW</p>
-        <br />
+        <br /> -->
     {/if}
 </div>
 

@@ -2,13 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="23788a9b-3437-4e19-a2cf-071da8d29dc2" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/ServerProject.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ServerProject.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/default.json" beforeDir="false" afterPath="$PROJECT_DIR$/default.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users.db" beforeDir="false" afterPath="$PROJECT_DIR$/users.db" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../client/src/components/GalleryImage.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/components/GalleryImage.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/components/Pages/Edit.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/components/Pages/Edit.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/components/Slider.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/components/Slider.svelte" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,9 +35,9 @@
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
-      <option name="SDK_HOME" value="" />
+      <option name="SDK_HOME" value="C:\Users\Szymon\Desktop\CMS_PythonInterpreter\venv\Scripts\python.exe" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
+      <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
@@ -92,8 +89,6 @@
         </entry>
       </map>
     </option>
-  </component>
-  <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/ServerProject$server.coverage" NAME="server Coverage Results" MODIFIED="1653226163213" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
 </project>

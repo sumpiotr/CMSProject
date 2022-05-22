@@ -89,6 +89,7 @@
             </div>
         </div>
     </div>
+    <br /><br />
     <div class="register">
         <h2 class="text-2xl mb-6">Register</h2>
 

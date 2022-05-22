@@ -42,7 +42,12 @@
 </script>
 
 <div>
+    <h4>{article.title}</h4>
+    <br /><br />
     <div class="article">{article.text}</div>
+    <br /><br /><br />
+    
+
 
     {#if logged}
         <div>
@@ -77,5 +82,11 @@
     .article {
         padding: 5px;
         font-size: 20px;
+        text-align: left;
+    }
+
+    h4 {
+        font-size: 21px;
+        font-weight: bold;
     }
 </style>

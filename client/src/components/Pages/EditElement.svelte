@@ -5,26 +5,19 @@
     import Paper from "@smui/paper";
     import HelperText from "@smui/textfield/helper-text";
     import CharacterCounter from "@smui/textfield/character-counter";
-    import DataTable, { Row, Cell } from "@smui/data-table";
-    import { dataset_dev } from "svelte/internal";
     import { Net } from "../../net.js";
     import Switch from "@smui/switch";
 
     export let element;
     export let addImg;
 
-    function setImg(e, i) {
+    function setImg(e, index) {
         let form = new FormData();
         form.append("img", e.target.files[0]);
 
         //ustawić img na podgląd
 
-        addImg(form, element.data, i);
-
-        // fetch("/setImg", {
-        //     method: "POST",
-        //     body: form,
-        // });
+        addImg(form, element.data, index);
     }
 
     function handle(name, min, max) {    
@@ -34,7 +27,27 @@
         return name;
     }
 
+    function addNewArticle() {
+        element.data.children.push({ title: "Article", text: "lorem ipsum suma ipsum lorem"});
+        element.data.children = element.data.children; // nie zmieniać!
+    }
 
+    function deleteArticle(index) {
+        element.data.children.splice(index, 1);        
+        element.data.children = element.data.children; // nie zmieniać!
+    }
+
+    //element.data.descriptions[i]
+
+    function addNewImage() {
+        element.data.images.push({ image: "none.jpg", description: "Description"});
+        element.data.images = element.data.images; // nie zmieniać!
+    }
+
+    function deleteImg(index) {
+        element.data.images.splice(index, 1);        
+        element.data.images = element.data.images; // nie zmieniać!
+    }
 </script>
 
 <div class="element">
@@ -44,9 +57,10 @@
                 <table>
                     <tr>
                         <td>
-                            <div class="row">
+                            <div class="bigTitle">Articles</div>
+                            <!-- <div class="row">
                                 <Textfield disabled class="Textfield" variant="filled" type="number" label="ID" input$min="0" input$max="10" on:change={() => {element.id = handle(element.id, 0, 10)}} bind:value={element.id} />
-                            </div>
+                            </div> -->
                         </td>
                         <td>
                             <div class="row">
@@ -57,13 +71,14 @@
                     </tr>
                     <tr>
                         <td>
-                            <div class="row">
+                            <!-- <div class="row">
                                 <Select disabled variant="filled" bind:value={element.name} key={(value) => value.toString()} label="Name">
                                     <Option value="Articles">Articles</Option>
                                     <Option value="Slider">Slider</Option>
                                     <Option value="News">News</Option>
                                 </Select>
-                            </div>
+                            </div> -->
+                            <div>&nbsp;</div>
                         </td>
                         <td>
                             <div class="row">
@@ -74,10 +89,10 @@
                     </tr>
                 </table>
 
-                <br /><br />
+                <!-- <br /><br />
                 <div class="row">
                     <Textfield class="Textfield" variant="filled" type="number" label="Articles" input$min="0" input$max="3" on:change={() => {element.data.articles = handle(element.data.articles, 0, 3)}} bind:value={element.data.articles} />
-                </div>
+                </div> -->
                 <br />
                 <div class="doPapera">
                     {#each element.data.children as article, i}
@@ -98,28 +113,34 @@
                                         <HelperText slot="helper">Text</HelperText>
                                     </Textfield>
                                 </div>
+                                <div class="row">
+                                    <Button on:click={() => {deleteArticle(i)}}>
+                                        <Label>Delete</Label>
+                                    </Button>
+                                </div>
                             </Paper>
                         </div>
                     {/each}
                 </div>
-
-                <!-- <br />
+                <br />
                 <div class="row">
-                    <Button on:click={() => {}}>
-                        <Label>SHOW</Label>
+                    <Button on:click={addNewArticle}>
+                        <Label>Add Article</Label>
                     </Button>
-                </div> -->
+                </div>
             </div>
         </Paper>
     {:else if element.name == "Slider"}
         <Paper elevation={6}>
             <div class="options-selector">
+                
                 <table>
                     <tr>
                         <td>
-                            <div class="row">
+                            <div class="bigTitle">Slider</div>
+                            <!-- <div class="row">
                                 <Textfield disabled  class="Textfield" variant="filled" type="number" label="ID" input$min="0" input$max="10" on:change={() => {element.id = handle(element.id, 0, 10)}} bind:value={element.id} />
-                            </div>
+                            </div> -->
                         </td>
                         <td>
                             <div class="row">
@@ -130,12 +151,16 @@
                     </tr>
                     <tr>
                         <td>
-                            <div class="row">
+                            <!-- <div class="row">
                                 <Select disabled variant="filled" bind:value={element.name} key={(value) => value.toString()} label="Name">
                                     <Option value="Articles">Articles</Option>
                                     <Option value="Slider">Slider</Option>
                                     <Option value="News">News</Option>
                                 </Select>
+                            </div> -->
+                            <div style="position: inline;">
+                                Autoplay:
+                                <Switch bind:checked={element.data.autoplay} />
                             </div>
                         </td>
                         <td>
@@ -147,22 +172,16 @@
                     </tr>
                 </table>
                 <br />
-                <div style="position: inline;">
-                    Autoplay:
-                    <Switch bind:checked={element.data.autoplay} />
-                </div>
-                <br />
                 {#if element.data.autoplay == true}
                     <div class="row">
                         <Textfield class="Textfield" variant="filled" type="number" label="Duration (s)" input$min="1" input$max="30" input$step="1" on:change={() => {element.data.duration = handle(element.data.duration, 1, 30)}} bind:value={element.data.duration} />
                     </div>
                     <br />
                 {/if}
-                <div class="row">
+                <!-- <div class="row">
                     <Textfield class="Textfield" variant="filled" type="number" label="Images" input$min="1" input$max="10" on:change={() => {element.data.images.length = handle(element.data.images.length, 1, 10)}} bind:value={element.data.images.length} />
-                </div>
-                <br />
-                {#if element.data.images.length <= 10 && element.data.images.length >= 1 && element.data.images.length % 1. == 0}
+                </div> -->
+                <!-- {#if element.data.images.length <= 10 && element.data.images.length >= 1 && element.data.images.length % 1. == 0}
                     <div>
                         <table>
                             {#each element.data.images as _, i}
@@ -188,14 +207,53 @@
                             {/each}
                         </table>
                     </div>
-                {/if}
+                {/if} -->
 
-                <!-- <br />
+
+
+
+                <div class="doPapera">
+                    {#each element.data.images as image, i}
+                        <div class="paper">
+                            <Paper elevation={6}>
+                                <div class="br" />
+                                <h4>Image {i + 1}:</h4>
+                                <div class="br" />
+                                <div class="row">
+                                    <input
+                                        type="file"
+                                        id="myfile"
+                                        name="myfile"
+                                        on:change={(e) => {
+                                            setImg(e, i);
+                                        }}
+                                    />
+                                </div>
+                                <div class="br" />
+                                <div class="row">
+                                    <Textfield class="Textfield" variant="filled" type="text" label="description" bind:value={element.data.descriptions[i]} />
+                                </div>
+                                <br />
+                                <div class="row">
+                                    <Button on:click={() => {deleteImg(i)}}>
+                                        <Label>Delete</Label>
+                                    </Button>
+                                </div>
+                            </Paper>
+                        </div>
+                    {/each}
+                </div>
+                <br />
                 <div class="row">
-                    <Button on:click={() => {}}>
-                        <Label>SHOW</Label>
+                    <Button on:click={addNewImage}>
+                        <Label>Add Image</Label>
                     </Button>
-                </div> -->
+                </div>
+
+
+
+
+
             </div>
         </Paper>
     {:else if element.name == "News"}
@@ -204,9 +262,10 @@
                 <table>
                     <tr>
                         <td>
-                            <div class="row">
+                            <div class="bigTitle">News</div>
+                            <!-- <div class="row">
                                 <Textfield disabled  class="Textfield" variant="filled" type="number" label="ID" input$min="0" input$max="10" on:change={() => {element.id = handle(element.id, 0, 10)}} bind:value={element.id} />
-                            </div>
+                            </div> -->
                         </td>
                         <td>
                             <div class="row">
@@ -217,12 +276,25 @@
                     </tr>
                     <tr>
                         <td>
-                            <div class="row">
+                            <!-- <div class="row">
                                 <Select disabled variant="filled" bind:value={element.name} key={(value) => value.toString()} label="Name">
                                     <Option value="Articles">Articles</Option>
                                     <Option value="Slider">Slider</Option>
                                     <Option value="News">News</Option>
                                 </Select>
+                            </div> -->
+                            <div>
+                                <input type="file" id="myfile" name="myfile" /><br />
+                                <!-- <div class="row">
+                                    <input
+                                        type="file"
+                                        id="newsfile"
+                                        name="newsfile"
+                                        on:change={(e) => {
+                                            setImg(e, 0);
+                                        }}
+                                    />
+                                </div> -->
                             </div>
                         </td>
                         <td>
@@ -233,7 +305,6 @@
                         </td>
                     </tr>
                 </table>
-
                 <br />
                 <div class="doPapera">
                     <div class="paper">
@@ -256,37 +327,8 @@
                         </Paper>
                     </div>
                 </div>
-                <br />
-                <h4>News image:</h4>
-                <div>
-                    <input type="file" id="myfile" name="myfile" /><br />
-                    <!-- <div class="row">
-                        <input
-                            type="file"
-                            id="newsfile"
-                            name="newsfile"
-                            on:change={(e) => {
-                                setImg(e, 0);
-                            }}
-                        />
-                    </div>
-                    <br /> -->
-                </div>
-
-                <!-- <br /><br /><br />
-                <div class="row">
-                    <Button on:click={() => {}}>
-                        <Label>SHOW</Label>
-                    </Button>
-                </div> -->
             </div>
         </Paper>
-    <!-- {:else}
-        <p>{element.id}</p>
-        <p>{element.name}</p>
-        <pre>data: {JSON.stringify(element.data, undefined, 4)}</pre>
-        <p>SHOW</p>
-        <br /> -->
     {/if}
 </div>
 
@@ -302,11 +344,6 @@
     .element {
         /* border: 1px solid black; */
         padding-left: 5px;
-    }
-
-    pre {
-        margin-left: 50px;
-        text-align: left;
     }
 
     .options-selector {
@@ -333,10 +370,6 @@
         margin-top: 15px;
     }
 
-    .articleP {
-        margin-left: 10px;
-    }
-
     .element :global(.smui-paper) {
         width: calc(100% - 40px);
         height: calc(100% - 40px);
@@ -349,8 +382,6 @@
     }
 
     .doPapera {
-        /* width: calc(50% - 60px);
-        height: calc(50% - 60px); */
         width: 100%;
         height: 100%;
         display: flex;
@@ -363,5 +394,16 @@
         height: auto;
         display: flex;
         flex-wrap: wrap;
+    }
+
+    .bigTitle {
+        font-size: 30px;
+        font-weight: bold;
+        margin-bottom: 30px;
+    }
+
+    table {
+        width:100%;
+        table-layout:fixed;
     }
 </style>

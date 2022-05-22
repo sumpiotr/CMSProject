@@ -13,16 +13,20 @@
                     "data": {
                         "images": [
                             {
-                                "image": "slider-img-2.jpg"
+                                "image": "slider-img-2.jpg",
+                                "description": "Description"
                             },
                             {
-                                "image": "slider-img-3.jpg"
+                                "image": "slider-img-3.jpg",
+                                "description": "Description"
                             },
                             {
-                                "image": "lornetka.jpg"
+                                "image": "lornetka.jpg",
+                                "description": "Description"
                             },
                             {
-                                "image": "droga.jpg"
+                                "image": "catfish.png",
+                                "description": "Description"
                             }
                         ],
                         "descriptions": [
@@ -48,7 +52,6 @@
                     "id": 1,
                     "name": "Articles",
                     "data": {
-                        "articles": 3,
                         "children": [
                             {
                                 "title": "Lorem ipsum",
@@ -61,10 +64,18 @@
                             {
                                 "title": "Article 3",
                                 "text": "lorem ipsum suma ipsum lorem"
+                            },
+                            {
+                                "title": "Article 3",
+                                "text": "lorem ipsum suma ipsum lorem"
+                            },
+                            {
+                                "title": "Article",
+                                "text": "lorem ipsum suma ipsum lorem"
                             }
                         ],
-                        "color": "#ff0000",
-                        "backgroundColor": "#ffffff"
+                        "color": "#000000",
+                        "backgroundColor": "#dedede"
                     }
                 },
                 {
@@ -93,12 +104,22 @@
                             {
                                 "title": "My map",
                                 "description": "Map of something",
-                                "image": "Mapa.jpg"
+                                "image": "catfish.png"
                             },
                             {
                                 "title": "Image2",
                                 "description": "Cool road",
                                 "image": "droga.jpg"
+                            },
+                            {
+                                "title": "New Image",
+                                "description": "Description",
+                                "image": "catfish.png"
+                            },
+                            {
+                                "title": "catfish",
+                                "description": "sum",
+                                "image": "catfish.png"
                             }
                         ]
                     }

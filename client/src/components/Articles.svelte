@@ -8,7 +8,7 @@
     <div class="container px-5 py-24 mx-auto">
         <div class="flex flex-wrap -m-4">
             {#each data.children as child, index}
-                <Article data={child} {index} />
+                <Article data={child} colors={data} {index} />
             {/each}
         </div>
     </div>

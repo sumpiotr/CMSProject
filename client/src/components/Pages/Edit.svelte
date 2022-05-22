@@ -9,10 +9,12 @@
     let localData = JSON.parse(JSON.stringify(fullData));
 
     import EditElement from "./EditElement.svelte";
+    import EditGallery from "../EditGallery.svelte";
 
     import Switch from "@smui/switch";
     import Button, { Label } from "@smui/button";
     import { Net } from "../../net.js";
+    import GalleryImage from "../GalleryImage.svelte";
 
     let isDarkMode = true;
 
@@ -20,7 +22,7 @@
 
     function addImg(form, data, i) {
         images.push((j) => {
-            form.append("oldImage", data.images[i]);
+            form.append("oldImage", data.images[i].image);
             console.log(form);
             fetch("./saveImg", {
                 method: "POST",
@@ -28,7 +30,7 @@
             })
                 .then((d) => d.json())
                 .then((d) => {
-                    data.images[i] = d.image;
+                    data.images[i].image = d.image;
                     j++;
                     if (j >= images.length - 1) {
                         images = [];
@@ -71,6 +73,8 @@
             {#each page.data as element}
                 <EditElement bind:element {addImg} />
             {/each}
+        {:else if page.pageName == "Gallery"}
+            <EditGallery bind:data={page.data[0].data} {addImg} />
 
             <!-- {#each Array(page.data) as _, i}
                 <EditElement bind:element={page.data[i]} />

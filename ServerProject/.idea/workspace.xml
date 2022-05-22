@@ -6,10 +6,8 @@
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/default.json" beforeDir="false" afterPath="$PROJECT_DIR$/default.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server.py" beforeDir="false" afterPath="$PROJECT_DIR$/server.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users.db" beforeDir="false" afterPath="$PROJECT_DIR$/users.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../client/src/components/GalleryImage.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/components/GalleryImage.svelte" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../client/src/components/Pages/Edit.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/components/Pages/Edit.svelte" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../client/src/components/Pages/EditElement.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/components/Pages/EditElement.svelte" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../client/src/components/Slider.svelte" beforeDir="false" afterPath="$PROJECT_DIR$/../client/src/components/Slider.svelte" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -94,6 +92,8 @@
         </entry>
       </map>
     </option>
-    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/ServerProject$server.coverage" NAME="server Coverage Results" MODIFIED="1653226163213" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

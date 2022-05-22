@@ -5,15 +5,16 @@
     import { _getCurrentPageIndexByCurrentParticleIndexInfinite } from "svelte-carousel/src/utils/page";
     import SliderItem from "./SliderItem.svelte";
 
+    console.log("slider images: ", data.images);
+
     let images = new Array(data.images.length);
 
     console.log(data);
 
-    for(let i = 0; i < data.images.length; i++) {
-
+    for (let i = 0; i < data.images.length; i++) {
         fetch("/getImg", {
             method: "POST",
-            body: JSON.stringify({ filename: data.images[i] }),
+            body: JSON.stringify({ filename: data.images[i].image }),
             headers: {
                 "Content-Type": "application/json",
             },
@@ -30,11 +31,7 @@
 </script>
 
 {#if data.autoplay == true}
-    <Carousel
-        autoplay
-        autoplayDuration={data.duration * 1000}
-        pauseOnFocus
-    >
+    <Carousel autoplay autoplayDuration={data.duration * 1000} pauseOnFocus>
         {#each data.images as _, i}
             <SliderItem image={images[i]} text={data.descriptions[i]} color={data.color} backgroundColor={data.backgroundColor} />
         {/each}

@@ -7,12 +7,15 @@ import Edit from "./components/Pages/Edit.svelte";
 import LogOut from "./components/Pages/LogOut.svelte";
 import UsersList from "./components/Pages/UsersList.svelte";
 import AccountSettings from "./components/Pages/AccountSettings.svelte";
+import Gallery from "./components/Pages/Gallery.svelte";
 
 export class ComponentManager {
     static getComponentByName(name) {
         switch (name) {
             case "Menu1":
                 return Menu1;
+            case "Gallery":
+                return Gallery;
             case "Articles":
                 return Articles;
             case "Login":

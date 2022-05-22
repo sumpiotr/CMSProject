@@ -66,10 +66,6 @@
                                 "text": "lorem ipsum suma ipsum lorem"
                             },
                             {
-                                "title": "Article 3",
-                                "text": "lorem ipsum suma ipsum lorem"
-                            },
-                            {
                                 "title": "Article",
                                 "text": "lorem ipsum suma ipsum lorem"
                             }
@@ -85,6 +81,18 @@
                         "image": "catfish.png",
                         "title": "News",
                         "text": "Lorem ipsum!!!",
+                        "color": "#000000",
+                        "backgroundColor": "#f5f5f5"
+                    }
+                },
+                {
+                    "name": "Global",
+                    "data": {
+                        "position": [
+                            "Slider",
+                            "Articles",
+                            "News"
+                        ],
                         "color": "#000000",
                         "backgroundColor": "#f5f5f5"
                     }

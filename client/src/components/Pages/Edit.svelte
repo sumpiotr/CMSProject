@@ -43,6 +43,31 @@
         });
     }
 
+    function rotateElements(tab) {
+        console.log(tab);
+        let tabOfElements = [0, 0, 0, 0]
+        for(let i = 0; i < localData.pages[0].data.length; i++) {
+            if(localData.pages[0].data[i].name == "Slider") tabOfElements[0] = localData.pages[0].data[i];
+            if(localData.pages[0].data[i].name == "Articles") tabOfElements[1] = localData.pages[0].data[i];
+            if(localData.pages[0].data[i].name == "News") tabOfElements[2] = localData.pages[0].data[i];
+            if(localData.pages[0].data[i].name == "Global") tabOfElements[3] = localData.pages[0].data[i];
+        }
+        let finalTab = [0, 0, 0, 0]
+
+        for(let i = 0; i < localData.pages[0].data.length - 1; i++) {
+            if(tab[i] == "Slider") finalTab[i] = tabOfElements[0];
+            if(tab[i] == "Articles") finalTab[i] = tabOfElements[1];
+            if(tab[i] == "News") finalTab[i] = tabOfElements[2];
+            console.log("finalTab");
+            console.log(finalTab[i]);
+            finalTab[i].id = i;
+        }
+        finalTab[3] = tabOfElements[3];
+
+        localData.pages[0].data = JSON.parse(JSON.stringify(finalTab))
+        console.log("ROTATE: ", localData);
+    }
+
     $: {
         console.log("Edit local: ", localData);
         console.log("Edit full: ", fullData);
@@ -71,7 +96,7 @@
     {#each localData.pages as page}
         {#if page.pageName == "Home"}
             {#each page.data as element}
-                <EditElement bind:element {addImg} />
+                <EditElement bind:element {addImg} {rotateElements} />
             {/each}
         {:else if page.pageName == "Gallery"}
             <EditGallery bind:data={page.data[0].data} {addImg} />

@@ -10,6 +10,7 @@
 
     export let element;
     export let addImg;
+    export let rotateElements;
 
     function setImg(e, index) {
         let form = new FormData();
@@ -47,6 +48,60 @@
     function deleteImg(index) {
         element.data.images.splice(index, 1);        
         element.data.images = element.data.images; // nie zmieniać!
+    }
+
+    function changePosition(i) {
+        console.log(i);
+        let second, third;
+        if(i == 0) {second=1; third=2;}
+        if(i == 1) {second=0; third=2;}
+        if(i == 2) {second=1; third=0;}
+
+        let posibilities = ["Slider", "Articles", "News"];
+        if(element.data.position[i] === element.data.position[second]) {
+            posibilities = posibilities.filter((item) => {
+                if(item === element.data.position[i] || item === element.data.position[third]) {
+                    return false;
+                }
+                else {
+                    return item;
+                }
+            })
+            element.data.position[second] = posibilities[0];
+        }
+        else if(element.data.position[i] === element.data.position[third]) {
+            posibilities = posibilities.filter((item) => {
+                if(item === element.data.position[i] || item === element.data.position[second]) {
+                    return false;
+                }
+                else {
+                    return item;
+                }
+            })
+            element.data.position[third] = posibilities[0];
+        }
+        console.log("tak");
+
+        rotateElements(element.data.position);
+    }
+
+    function sprawdzCzyRozne() {
+        if (!(oldElementDataPosition[0] == "Slider" || oldElementDataPosition[0] == "Articles" ||  oldElementDataPosition[0] == "News")) return -1;
+        for(let i = 0; i < 3; i++) {
+            if(element.data.position[i] != oldElementDataPosition[i]) return i;
+        }
+        return -1;
+    }
+
+    let oldElementDataPosition = []
+    $: {
+        if (element.data.position != undefined) {
+            let ile = sprawdzCzyRozne();
+            if (ile != -1) {
+                changePosition(ile)
+            }
+            oldElementDataPosition = [...element.data.position];
+        }
     }
 </script>
 
@@ -178,40 +233,6 @@
                     </div>
                     <br />
                 {/if}
-                <!-- <div class="row">
-                    <Textfield class="Textfield" variant="filled" type="number" label="Images" input$min="1" input$max="10" on:change={() => {element.data.images.length = handle(element.data.images.length, 1, 10)}} bind:value={element.data.images.length} />
-                </div> -->
-                <!-- {#if element.data.images.length <= 10 && element.data.images.length >= 1 && element.data.images.length % 1. == 0}
-                    <div>
-                        <table>
-                            {#each element.data.images as _, i}
-                                <tr>
-                                    <td>
-                                        <div class="row">
-                                            <input
-                                                type="file"
-                                                id="myfile"
-                                                name="myfile"
-                                                on:change={(e) => {
-                                                    setImg(e, i);
-                                                }}
-                                            />
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="row">
-                                            <Textfield class="Textfield" variant="filled" type="text" label="description" bind:value={element.data.descriptions[i]} />
-                                        </div>
-                                    </td>
-                                </tr>
-                            {/each}
-                        </table>
-                    </div>
-                {/if} -->
-
-
-
-
                 <div class="doPapera">
                     {#each element.data.images as image, i}
                         <div class="paper">
@@ -249,11 +270,6 @@
                         <Label>Add Image</Label>
                     </Button>
                 </div>
-
-
-
-
-
             </div>
         </Paper>
     {:else if element.name == "News"}
@@ -327,6 +343,61 @@
                         </Paper>
                     </div>
                 </div>
+            </div>
+        </Paper>
+    {:else if element.name == "Global"}
+        <Paper elevation={6}>
+            <div class="options-selector">
+                <table>
+                    <tr>
+                        <td>
+                            <div class="bigTitle">Global</div>
+                        </td>
+                        <td>
+                            <div class="row">
+                                <label for="article_color">Color&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                                <input type="color" id="article_color" name="article_color" bind:value={element.data.color} />
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h4>Position:</h4>
+                        </td>
+                        <td>
+                            <div class="row">
+                                <label for="article_backgroundColor">Background Color</label>
+                                <input type="color" id="article_backgroundColor" name="article_backgroundColor" bind:value={element.data.backgroundColor} />
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+                <br />
+                <div class="row">
+                    <Select variant="filled" bind:value={element.data.position[0]} key={(value) => value.toString()} label="1">
+                        <Option value="Articles">Articles</Option>
+                        <Option value="Slider">Slider</Option>
+                        <Option value="News">News</Option>
+                    </Select>
+                </div>
+                <div class="row">
+                    <Select variant="filled" bind:value={element.data.position[1]} key={(value) => value.toString()} label="2">
+                        <Option value="Articles">Articles</Option>
+                        <Option value="Slider">Slider</Option>
+                        <Option value="News">News</Option>
+                    </Select>
+                </div>
+                <div class="row">
+                    <Select variant="filled" bind:value={element.data.position[2]} key={(value) => value.toString()} label="3">
+                        <Option value="Articles">Articles</Option>
+                        <Option value="Slider">Slider</Option>
+                        <Option value="News">News</Option>
+                    </Select>
+                </div>
+
+
+
+
             </div>
         </Paper>
     {/if}

@@ -11,15 +11,28 @@
     let logged = false;
     let admin = false;
     var newURL = window.location.pathname;
+
+
+    function encodePayload(payload) {
+    return JSON.stringify(payload).
+        replace(/[\u007F-\uFFFF]/g, function (c) {
+            return "\\u" + ("0000" + c.charCodeAt(0).toString(16)).substr(-4);
+        });
+    }
+
+
     fetch("./getPage", {
         method: "POST",
-        body: JSON.stringify({ name: newURL }),
-        headers: {
-            "Content-Type": "application/json",
-        },
+        // body: JSON.stringify({ name: newURL }),
+        body: encodePayload({ name: newURL }),
+        // headers: {
+        //     // "Content-Type": "application/json",
+        //     "Content-type": "application/json; charset=utf-8"
+        // },
     })
         .then((d) => d.json())
         .then((d) => {
+            console.log(d);
             data = d.data;
             logged = d.logged;
             admin = d.admin;

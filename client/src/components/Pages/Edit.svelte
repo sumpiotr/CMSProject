@@ -63,8 +63,8 @@
 </script>
 
 <div class="edit">
-    Dark Mode
-    <Switch bind:checked={isDarkMode} />
+    <!-- Dark Mode
+    <Switch bind:checked={isDarkMode} /> -->
 
     {#each localData.pages as page}
         {#if page.pageName == "Home"}
@@ -78,11 +78,11 @@
         {/if}
     {/each}
     <div class="buttons">
-        <br />
+        <!-- <br />
         <Button on:click={() => {}}>
             <Label>Add New</Label>
-        </Button>
-        <br /><br /><br />
+        </Button> -->
+        <br />
         <Button
             on:click={() => {
                 cancel();
@@ -112,6 +112,8 @@
     }
 
     .buttons {
-        margin-left: 35px;
+        /* margin-left: 35px; */
+        float: right;
+        margin-right: 65px;
     }
 </style>

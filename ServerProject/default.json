@@ -29,7 +29,7 @@
                             null,
                             null
                         ],
-                        "duration": 1,
+                        "duration": 30,
                         "autoplay": true,
                         "text": "Slider",
                         "color": "#ffffff",
@@ -40,7 +40,7 @@
                     "id": 1,
                     "name": "Articles",
                     "data": {
-                        "articles": 1,
+                        "articles": 3,
                         "children": [
                             {
                                 "title": "Lorem ipsum",
@@ -68,31 +68,6 @@
                         "text": "Lorem ipsum!!!",
                         "color": "#000000",
                         "backgroundColor": "#f5f5f5"
-                    }
-                }
-            ]
-        },
-        {
-            "pageName": "Gallery",
-            "path": "gallery",
-            "login": 0,
-            "admin": 0,
-            "data": [
-                {
-                    "name": "Edit",
-                    "data": {
-                        "images": [
-                            {
-                                "title":  "Catfish",
-                                "description":  "Cat and fish",
-                                "image": ""
-                            },
-                              {
-                                "title":  "Image2",
-                                "description":  "Cool",
-                                "image": ""
-                            }
-                        ]
                     }
                 }
             ]

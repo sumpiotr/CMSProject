@@ -1,5 +1,23 @@
 <script>
     export let data;
+
+
+    let image = ""
+    fetch("/getImg", {
+            method: "POST",
+            body: JSON.stringify({ filename: data.image }),
+            headers: {
+                "Content-Type": "application/json",
+            },
+        })
+            .then((response) => response.blob())
+            .then((imageBlob) => {
+                // Then create a local URL for that image and print it
+                const imageObjectURL = URL.createObjectURL(imageBlob);
+                console.log(imageObjectURL);
+
+                image = imageObjectURL;
+            });
 </script>
 
 <div style="--color: {data.color}; --backgroundColor: {data.backgroundColor}">
@@ -11,7 +29,7 @@
             <p>{data.text}</p>
         </div>
         <div class="img">
-            img
+            <img src={image} alt="img" width="300" height="300">
         </div>
     </div>
 </div>

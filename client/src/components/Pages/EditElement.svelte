@@ -354,10 +354,10 @@
                             <div class="bigTitle">Global</div>
                         </td>
                         <td>
-                            <div class="row">
+                            <!-- <div class="row">
                                 <label for="article_color">Color&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
                                 <input type="color" id="article_color" name="article_color" bind:value={element.data.color} />
-                            </div>
+                            </div> -->
                         </td>
                     </tr>
                     <tr>
@@ -365,10 +365,10 @@
                             <h4>Position:</h4>
                         </td>
                         <td>
-                            <div class="row">
+                            <!-- <div class="row">
                                 <label for="article_backgroundColor">Background Color</label>
                                 <input type="color" id="article_backgroundColor" name="article_backgroundColor" bind:value={element.data.backgroundColor} />
-                            </div>
+                            </div> -->
                         </td>
                     </tr>
                 </table>

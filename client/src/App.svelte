@@ -80,10 +80,19 @@
                 {/if}
             {/if}
         {/each}
-
-        <!-- Footer -->
-        <Footer />
     </Router>
+
+    {#each data.pages as page}
+        {#if page.pageName == "Home"}
+            {#each page.data as child}
+                {#if child.name == "Global"}
+                    <Footer data={child.data} />
+                {/if}
+            {/each}
+        {/if}
+    {/each}
+
+    <!-- Footer -->
 </main>
 
 <style>

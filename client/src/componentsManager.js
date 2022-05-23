@@ -1,4 +1,5 @@
 import Menu1 from "./components/Menu1.svelte";
+import Menu2 from "./components/Menu2.svelte";
 import Articles from "./components/Articles.svelte";
 import Slider from "./components/Slider.svelte";
 import News from "./components/News.svelte";
@@ -15,6 +16,8 @@ export class ComponentManager {
         switch (name) {
             case "Menu1":
                 return Menu1;
+            case "Menu2":
+                return Menu2;
             case "Gallery":
                 return Gallery;
             case "ArticlesPage":

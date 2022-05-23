@@ -9,7 +9,11 @@
     {#each pages as page}
         {#if page.path == path}
             {#each page.data as element}
-                <svelte:component this={ComponentManager.getComponentByName(element.name)} data={element.data} bind:fullData={fullData}/>
+                {#if element.name == "ArticlesPage"}
+                    <svelte:component this={ComponentManager.getComponentByName(element.name)} data={element.data} {pages} bind:fullData />
+                {:else}
+                    <svelte:component this={ComponentManager.getComponentByName(element.name)} data={element.data} bind:fullData />
+                {/if}
             {/each}
         {/if}
     {/each}

@@ -12,14 +12,11 @@
     let admin = false;
     var newURL = window.location.pathname;
 
-
     function encodePayload(payload) {
-    return JSON.stringify(payload).
-        replace(/[\u007F-\uFFFF]/g, function (c) {
+        return JSON.stringify(payload).replace(/[\u007F-\uFFFF]/g, function (c) {
             return "\\u" + ("0000" + c.charCodeAt(0).toString(16)).substr(-4);
         });
     }
-
 
     fetch("./getPage", {
         method: "POST",
@@ -50,7 +47,17 @@
 <main class="flex flex-col min-h-screen justify-between" style={LIGHT_THEME}>
     <Router>
         <!-- Menu -->
-        <svelte:component this={ComponentManager.getComponentByName(data.menuType)} bind:data={data.pages} {logged} {admin} />
+        <!-- <svelte:component this={ComponentManager.getComponentByName(data.menu.menuType)} bind:data={data.pages} {logged} {admin} name={data.menu.name} /> -->
+
+        {#each data.pages as page}
+            {#if page.pageName == "Home"}
+                {#each page.data as child}
+                    {#if child.name == "Global"}
+                        <svelte:component this={ComponentManager.getComponentByName("Menu" + child.data.menuMode)} bind:data={data.pages} {logged} {admin} name={child.data.companyName} />
+                    {/if}
+                {/each}
+            {/if}
+        {/each}
 
         <!-- Komponenty -->
         {#each data.pages as page}

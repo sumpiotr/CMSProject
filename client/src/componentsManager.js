@@ -8,6 +8,7 @@ import LogOut from "./components/Pages/LogOut.svelte";
 import UsersList from "./components/Pages/UsersList.svelte";
 import AccountSettings from "./components/Pages/AccountSettings.svelte";
 import Gallery from "./components/Pages/Gallery.svelte";
+import ArticlesPage from "./components/Pages/ArticlesPage.svelte";
 
 export class ComponentManager {
     static getComponentByName(name) {
@@ -16,6 +17,8 @@ export class ComponentManager {
                 return Menu1;
             case "Gallery":
                 return Gallery;
+            case "ArticlesPage":
+                return ArticlesPage;
             case "Articles":
                 return Articles;
             case "Login":

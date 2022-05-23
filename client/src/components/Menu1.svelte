@@ -2,6 +2,7 @@
     export let data;
     export let logged;
     export let admin;
+    export let name;
 </script>
 
 <header class="text-gray-600 body-font">
@@ -19,7 +20,7 @@
             >
                 <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
             </svg>
-            <span class="ml-3 text-xl">Catfish</span>
+            <span class="ml-3 text-xl">{name}</span>
         </a>
         <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center">
             {#each data as child}

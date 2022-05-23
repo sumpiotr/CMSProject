@@ -160,6 +160,10 @@
                                 <div class="row">
                                     <Textfield class="Textfield" variant="filled" type="text" label="Title" bind:value={article.title} />
                                 </div>
+                                <div class="br" />
+                                <div class="row">
+                                    <Textfield class="Textfield" variant="filled" type="text" label="Category" bind:value={article.category} />
+                                </div>
                                 <br />
                                 <div>
                                     <!-- bez labela! -->
@@ -395,9 +399,35 @@
                     </Select>
                 </div>
 
-
-
-
+                <br />
+                <h4>Logo:</h4>
+                <br />
+                <div class="row">
+                    <input
+                        type="file"
+                        id="myfile"
+                        name="myfile"
+                        on:change={(e) => {
+                            //setImg(e, i);
+                        }}
+                    />
+                </div>
+                <br />
+                <h4>Other:</h4>
+                <br />
+                <div class="row">
+                    <Select variant="filled" bind:value={element.data.menuMode} key={(value) => value.toString()} label="Menu mode">
+                        <Option value="1">1</Option>
+                        <Option value="2">2</Option>
+                    </Select>
+                </div>
+                <div class="row">
+                    <Textfield class="Textfield" variant="filled" type="text" label="Company Name" bind:value={element.data.companyName} />
+                </div>
+                <div class="row">
+                    <Textfield class="Textfield" variant="filled" type="text" label="Footer Text" bind:value={element.data.footerText} />
+                </div>
+                
             </div>
         </Paper>
     {/if}

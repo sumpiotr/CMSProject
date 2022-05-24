@@ -11,14 +11,15 @@
     let articlesData = { children: [] };
 
     let articles = [];
+    let reverse = true;
 
     for (let page of pages) {
         if (page.pageName == "Home") {
             for (let child of page.data) {
                 if (child.name == "Articles") {
                     articles = child.data.children;
-                    articles.reverse();
                     articlesData.children = [...articles];
+                    articlesData.children.reverse();
                     break;
                 }
             }
@@ -29,6 +30,7 @@
         let searchedArticles = [];
         if (articleCategory == "") {
             searchedArticles = [...articles];
+            searchedArticles.reverse();
         } else {
             for (let article of articles) {
                 if (article.category == articleCategory) {
@@ -42,6 +44,9 @@
                 console.log(typeof a.title);
                 return a.title.localeCompare(b.title);
             });
+            reverse = false;
+        } else {
+            reverse = true;
         }
 
         articlesData.children = searchedArticles;
@@ -57,5 +62,5 @@
         </select>
         <button type="Button" on:click={search}>Search</button>
     </div>
-    <Articles data={articlesData} />
+    <Articles data={articlesData} {articles} />
 </section>

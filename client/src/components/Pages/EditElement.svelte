@@ -29,7 +29,7 @@
     }
 
     function addNewArticle() {
-        element.data.children.push({ title: "Article", text: "lorem ipsum suma ipsum lorem"});
+        element.data.children.push({ title: "Article", category: "kat1", text: "lorem ipsum suma ipsum lorem"});
         element.data.children = element.data.children; // nie zmieniać!
     }
 

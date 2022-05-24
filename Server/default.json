@@ -69,11 +69,12 @@
                             },
                             {
                                 "title": "Article",
-                                "category": "kat1",
+                                "category": "kat3",
                                 "text": "lorem ipsum suma ipsum lorem"
                             },
                             {
-                                "title": "The newest",
+                                "title": "Article",
+                                "category": "kat3",
                                 "text": "lorem ipsum suma ipsum lorem"
                             }
                         ],

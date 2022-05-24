@@ -53,7 +53,14 @@
             {#if page.pageName == "Home"}
                 {#each page.data as child}
                     {#if child.name == "Global"}
-                        <svelte:component this={ComponentManager.getComponentByName("Menu" + child.data.menuMode)} bind:data={data.pages} {logged} {admin} name={child.data.companyName} />
+                        <svelte:component
+                            this={ComponentManager.getComponentByName("Menu" + child.data.menuMode)}
+                            bind:data={data.pages}
+                            {logged}
+                            {admin}
+                            name={child.data.companyName}
+                            logo={child.data.images[0].image}
+                        />
                     {/if}
                 {/each}
             {/if}
@@ -86,7 +93,7 @@
         {#if page.pageName == "Home"}
             {#each page.data as child}
                 {#if child.name == "Global"}
-                    <Footer data={child.data} />
+                    <Footer data={child.data} logo={child.data.images[0].image} />
                 {/if}
             {/each}
         {/if}

@@ -3,6 +3,25 @@
     export let logged;
     export let admin;
     export let name;
+
+    export let logo;
+
+    let image = "";
+    fetch("/getImg", {
+        method: "POST",
+        body: JSON.stringify({ filename: logo }),
+        headers: {
+            "Content-Type": "application/json",
+        },
+    })
+        .then((response) => response.blob())
+        .then((imageBlob) => {
+            // Then create a local URL for that image and print it
+            const imageObjectURL = URL.createObjectURL(imageBlob);
+            console.log(imageObjectURL);
+
+            image = imageObjectURL;
+        });
 </script>
 
 <header class="text-gray-600 body-font">
@@ -17,18 +36,7 @@
             {/each}
         </nav>
         <a class="flex order-first lg:order-none lg:w-1/5 title-font font-medium items-center text-gray-900 lg:items-center lg:justify-center mb-4 md:mb-0">
-            <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                class="w-10 h-10 text-white p-2 bg-indigo-500 rounded-full"
-                viewBox="0 0 24 24"
-            >
-                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
-            </svg>
+            <img src={image} />
             <span class="ml-3 text-xl">{name}</span>
         </a>
         <div class="lg:w-2/5 inline-flex lg:justify-end ml-5 lg:ml-0" />

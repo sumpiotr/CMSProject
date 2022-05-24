@@ -440,7 +440,7 @@
                         id="myfile"
                         name="myfile"
                         on:change={(e) => {
-                            //setImg(e, i);
+                            setImg(e, 0);
                         }}
                     />
                 </div>

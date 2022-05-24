@@ -105,7 +105,11 @@
                             "Articles",
                             "News"
                         ],
-                        "logo": "",
+                        "images": [
+                            {
+                                "image": "catfish.png"
+                            }
+                        ],
                         "companyName": "Catfish Company",
                         "footerText": "Catfish",
                         "menuMode": "1",

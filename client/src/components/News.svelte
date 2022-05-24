@@ -1,23 +1,22 @@
 <script>
     export let data;
 
-
-    let image = ""
+    let image = "";
     fetch("/getImg", {
-            method: "POST",
-            body: JSON.stringify({ filename: data.image }),
-            headers: {
-                "Content-Type": "application/json",
-            },
-        })
-            .then((response) => response.blob())
-            .then((imageBlob) => {
-                // Then create a local URL for that image and print it
-                const imageObjectURL = URL.createObjectURL(imageBlob);
-                console.log(imageObjectURL);
+        method: "POST",
+        body: JSON.stringify({ filename: data.images[0].image }),
+        headers: {
+            "Content-Type": "application/json",
+        },
+    })
+        .then((response) => response.blob())
+        .then((imageBlob) => {
+            // Then create a local URL for that image and print it
+            const imageObjectURL = URL.createObjectURL(imageBlob);
+            console.log(imageObjectURL);
 
-                image = imageObjectURL;
-            });
+            image = imageObjectURL;
+        });
 </script>
 
 <div style="--color: {data.color}; --backgroundColor: {data.backgroundColor}">
@@ -31,7 +30,7 @@
             </div>
         </div>
         <div class="img">
-            <img src={image} alt="img" width="500" height="500">
+            <img src={image} alt="img" width="500" height="500" />
         </div>
     </div>
 </div>
@@ -49,7 +48,6 @@
         align-items: center;
         justify-content: center;
         flex-direction: column;
-        
     }
 
     .title {
@@ -60,7 +58,6 @@
     }
 
     .text {
-
     }
 
     .textNews {

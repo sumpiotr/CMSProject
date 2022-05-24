@@ -21,63 +21,69 @@
         addImg(form, element.data, index);
     }
 
-    function handle(name, min, max) {    
-        if(name % 1. != 0) name = Math.floor(name);
-        if(name > max) name = max;
-        if(name < min) name = min;
+    function handle(name, min, max) {
+        if (name % 1 != 0) name = Math.floor(name);
+        if (name > max) name = max;
+        if (name < min) name = min;
         return name;
     }
 
     function addNewArticle() {
-        element.data.children.push({ title: "Article", category: "kat1", text: "lorem ipsum suma ipsum lorem"});
+        element.data.children.push({ title: "Article", category: "kat1", text: "lorem ipsum suma ipsum lorem" });
         element.data.children = element.data.children; // nie zmieniać!
     }
 
     function deleteArticle(index) {
-        element.data.children.splice(index, 1);        
+        element.data.children.splice(index, 1);
         element.data.children = element.data.children; // nie zmieniać!
     }
 
     //element.data.descriptions[i]
 
     function addNewImage() {
-        element.data.images.push({ image: "none.jpg", description: "Description"});
+        element.data.images.push({ image: "none.jpg", description: "Description" });
         element.data.images = element.data.images; // nie zmieniać!
     }
 
     function deleteImg(index) {
-        element.data.images.splice(index, 1);        
+        element.data.images.splice(index, 1);
         element.data.images = element.data.images; // nie zmieniać!
     }
 
     function changePosition(i) {
         console.log(i);
         let second, third;
-        if(i == 0) {second=1; third=2;}
-        if(i == 1) {second=0; third=2;}
-        if(i == 2) {second=1; third=0;}
+        if (i == 0) {
+            second = 1;
+            third = 2;
+        }
+        if (i == 1) {
+            second = 0;
+            third = 2;
+        }
+        if (i == 2) {
+            second = 1;
+            third = 0;
+        }
 
         let posibilities = ["Slider", "Articles", "News"];
-        if(element.data.position[i] === element.data.position[second]) {
+        if (element.data.position[i] === element.data.position[second]) {
             posibilities = posibilities.filter((item) => {
-                if(item === element.data.position[i] || item === element.data.position[third]) {
+                if (item === element.data.position[i] || item === element.data.position[third]) {
                     return false;
-                }
-                else {
+                } else {
                     return item;
                 }
-            })
+            });
             element.data.position[second] = posibilities[0];
-        }
-        else if(element.data.position[i] === element.data.position[third]) {
+        } else if (element.data.position[i] === element.data.position[third]) {
             posibilities = posibilities.filter((item) => {
-                if(item === element.data.position[i] || item === element.data.position[second]) {
+                if (item === element.data.position[i] || item === element.data.position[second]) {
                     return false;
-                }
-                else {
+                } else {
                     return item;
                 }
-            })
+            });
             element.data.position[third] = posibilities[0];
         }
         console.log("tak");
@@ -86,19 +92,19 @@
     }
 
     function sprawdzCzyRozne() {
-        if (!(oldElementDataPosition[0] == "Slider" || oldElementDataPosition[0] == "Articles" ||  oldElementDataPosition[0] == "News")) return -1;
-        for(let i = 0; i < 3; i++) {
-            if(element.data.position[i] != oldElementDataPosition[i]) return i;
+        if (!(oldElementDataPosition[0] == "Slider" || oldElementDataPosition[0] == "Articles" || oldElementDataPosition[0] == "News")) return -1;
+        for (let i = 0; i < 3; i++) {
+            if (element.data.position[i] != oldElementDataPosition[i]) return i;
         }
         return -1;
     }
 
-    let oldElementDataPosition = []
+    let oldElementDataPosition = [];
     $: {
         if (element.data.position != undefined) {
             let ile = sprawdzCzyRozne();
             if (ile != -1) {
-                changePosition(ile)
+                changePosition(ile);
             }
             oldElementDataPosition = [...element.data.position];
         }
@@ -173,7 +179,11 @@
                                     </Textfield>
                                 </div>
                                 <div class="row">
-                                    <Button on:click={() => {deleteArticle(i)}}>
+                                    <Button
+                                        on:click={() => {
+                                            deleteArticle(i);
+                                        }}
+                                    >
                                         <Label>Delete</Label>
                                     </Button>
                                 </div>
@@ -192,7 +202,6 @@
     {:else if element.name == "Slider"}
         <Paper elevation={6}>
             <div class="options-selector">
-                
                 <table>
                     <tr>
                         <td>
@@ -233,7 +242,19 @@
                 <br />
                 {#if element.data.autoplay == true}
                     <div class="row">
-                        <Textfield class="Textfield" variant="filled" type="number" label="Duration (s)" input$min="1" input$max="30" input$step="1" on:change={() => {element.data.duration = handle(element.data.duration, 1, 30)}} bind:value={element.data.duration} />
+                        <Textfield
+                            class="Textfield"
+                            variant="filled"
+                            type="number"
+                            label="Duration (s)"
+                            input$min="1"
+                            input$max="30"
+                            input$step="1"
+                            on:change={() => {
+                                element.data.duration = handle(element.data.duration, 1, 30);
+                            }}
+                            bind:value={element.data.duration}
+                        />
                     </div>
                     <br />
                 {/if}
@@ -260,7 +281,11 @@
                                 </div>
                                 <br />
                                 <div class="row">
-                                    <Button on:click={() => {deleteImg(i)}}>
+                                    <Button
+                                        on:click={() => {
+                                            deleteImg(i);
+                                        }}
+                                    >
                                         <Label>Delete</Label>
                                     </Button>
                                 </div>
@@ -304,7 +329,14 @@
                                 </Select>
                             </div> -->
                             <div>
-                                <input type="file" id="myfile" name="myfile" /><br />
+                                <input
+                                    type="file"
+                                    id="myfile"
+                                    name="myfile"
+                                    on:change={(e) => {
+                                        setImg(e, 0);
+                                    }}
+                                /><br />
                                 <!-- <div class="row">
                                     <input
                                         type="file"
@@ -427,7 +459,6 @@
                 <div class="row">
                     <Textfield class="Textfield" variant="filled" type="text" label="Footer Text" bind:value={element.data.footerText} />
                 </div>
-                
             </div>
         </Paper>
     {/if}
@@ -504,7 +535,7 @@
     }
 
     table {
-        width:100%;
-        table-layout:fixed;
+        width: 100%;
+        table-layout: fixed;
     }
 </style>

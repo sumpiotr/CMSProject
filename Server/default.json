@@ -24,7 +24,7 @@
                                 "description": "Description"
                             },
                             {
-                                "image": "catfish.png",
+                                "image": "kocirybka.jpeg",
                                 "description": "Description"
                             }
                         ],
@@ -32,7 +32,7 @@
                             "slider1",
                             "slider2",
                             "lornetka",
-                            "droga",
+                            "catfish",
                             "gory",
                             null,
                             null,
@@ -86,9 +86,13 @@
                     "id": 2,
                     "name": "News",
                     "data": {
-                        "image": "catfish.png",
+                        "images": [
+                            {
+                                "image": "catfish.png"
+                            }
+                        ],
                         "title": "News",
-                        "text": "Lorem ipsum!!!",
+                        "text": "Lorem Ipsum!!!",
                         "color": "#000000",
                         "backgroundColor": "#f5f5f5"
                     }
